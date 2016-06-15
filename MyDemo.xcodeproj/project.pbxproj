@@ -26,6 +26,13 @@
 		7429EF5E1D112E2400A59B6E /* VICacheSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF501D112E2400A59B6E /* VICacheSessionManager.m */; };
 		7429EF5F1D112E2400A59B6E /* VIMediaCacheWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF521D112E2400A59B6E /* VIMediaCacheWorker.m */; };
 		7429EF601D112E2400A59B6E /* VIURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF541D112E2400A59B6E /* VIURLProtocol.m */; };
+		7429EF711D115CB200A59B6E /* AVPlayerItem+MCCacheSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF631D115CB200A59B6E /* AVPlayerItem+MCCacheSupport.m */; };
+		7429EF721D115CB200A59B6E /* MCAVPlayerItemCacheFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF661D115CB200A59B6E /* MCAVPlayerItemCacheFile.m */; };
+		7429EF731D115CB200A59B6E /* MCAVPlayerItemCacheLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF681D115CB200A59B6E /* MCAVPlayerItemCacheLoader.m */; };
+		7429EF741D115CB200A59B6E /* MCAVPlayerItemCacheTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF6A1D115CB200A59B6E /* MCAVPlayerItemCacheTask.m */; };
+		7429EF751D115CB200A59B6E /* MCAVPlayerItemLocalCacheTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF6C1D115CB200A59B6E /* MCAVPlayerItemLocalCacheTask.m */; };
+		7429EF761D115CB200A59B6E /* MCAVPlayerItemRemoteCacheTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF6E1D115CB200A59B6E /* MCAVPlayerItemRemoteCacheTask.m */; };
+		7429EF771D115CB200A59B6E /* MCCacheSupportUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF701D115CB200A59B6E /* MCCacheSupportUtils.m */; };
 		7431DC851CEAC5C900BDEAC2 /* MMPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7431DC831CEAC5C900BDEAC2 /* MMPlayerView.m */; };
 		7431DC861CEAC5C900BDEAC2 /* MMPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7431DC841CEAC5C900BDEAC2 /* MMPlayerView.xib */; };
 		74328DA61CFD664500E3E735 /* CustomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74328DA51CFD664500E3E735 /* CustomeView.m */; };
@@ -79,6 +86,20 @@
 		7429EF531D112E2400A59B6E /* VIURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIURLProtocol.h; sourceTree = "<group>"; };
 		7429EF541D112E2400A59B6E /* VIURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIURLProtocol.m; sourceTree = "<group>"; };
 		7429EF551D112E2400A59B6E /* VIMediaCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIMediaCache.h; sourceTree = "<group>"; };
+		7429EF621D115CB200A59B6E /* AVPlayerItem+MCCacheSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AVPlayerItem+MCCacheSupport.h"; sourceTree = "<group>"; };
+		7429EF631D115CB200A59B6E /* AVPlayerItem+MCCacheSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVPlayerItem+MCCacheSupport.m"; sourceTree = "<group>"; };
+		7429EF651D115CB200A59B6E /* MCAVPlayerItemCacheFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAVPlayerItemCacheFile.h; sourceTree = "<group>"; };
+		7429EF661D115CB200A59B6E /* MCAVPlayerItemCacheFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAVPlayerItemCacheFile.m; sourceTree = "<group>"; };
+		7429EF671D115CB200A59B6E /* MCAVPlayerItemCacheLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAVPlayerItemCacheLoader.h; sourceTree = "<group>"; };
+		7429EF681D115CB200A59B6E /* MCAVPlayerItemCacheLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAVPlayerItemCacheLoader.m; sourceTree = "<group>"; };
+		7429EF691D115CB200A59B6E /* MCAVPlayerItemCacheTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAVPlayerItemCacheTask.h; sourceTree = "<group>"; };
+		7429EF6A1D115CB200A59B6E /* MCAVPlayerItemCacheTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAVPlayerItemCacheTask.m; sourceTree = "<group>"; };
+		7429EF6B1D115CB200A59B6E /* MCAVPlayerItemLocalCacheTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAVPlayerItemLocalCacheTask.h; sourceTree = "<group>"; };
+		7429EF6C1D115CB200A59B6E /* MCAVPlayerItemLocalCacheTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAVPlayerItemLocalCacheTask.m; sourceTree = "<group>"; };
+		7429EF6D1D115CB200A59B6E /* MCAVPlayerItemRemoteCacheTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAVPlayerItemRemoteCacheTask.h; sourceTree = "<group>"; };
+		7429EF6E1D115CB200A59B6E /* MCAVPlayerItemRemoteCacheTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAVPlayerItemRemoteCacheTask.m; sourceTree = "<group>"; };
+		7429EF6F1D115CB200A59B6E /* MCCacheSupportUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCacheSupportUtils.h; sourceTree = "<group>"; };
+		7429EF701D115CB200A59B6E /* MCCacheSupportUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCacheSupportUtils.m; sourceTree = "<group>"; };
 		7431DC821CEAC5C900BDEAC2 /* MMPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMPlayerView.h; sourceTree = "<group>"; };
 		7431DC831CEAC5C900BDEAC2 /* MMPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMPlayerView.m; sourceTree = "<group>"; };
 		7431DC841CEAC5C900BDEAC2 /* MMPlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MMPlayerView.xib; sourceTree = "<group>"; };
@@ -108,6 +129,7 @@
 		4D51BD9B1CC4D5BE00090B32 = {
 			isa = PBXGroup;
 			children = (
+				7429EF611D115CB200A59B6E /* AVPlayerCacheSupport */,
 				7429EF3C1D112E2400A59B6E /* VIMediaCache */,
 				4D51BDA61CC4D5BE00090B32 /* TestProject */,
 				4D51BDC01CC4D5BE00090B32 /* TestProjectTests */,
@@ -230,6 +252,35 @@
 			path = URLProtocol;
 			sourceTree = "<group>";
 		};
+		7429EF611D115CB200A59B6E /* AVPlayerCacheSupport */ = {
+			isa = PBXGroup;
+			children = (
+				7429EF621D115CB200A59B6E /* AVPlayerItem+MCCacheSupport.h */,
+				7429EF631D115CB200A59B6E /* AVPlayerItem+MCCacheSupport.m */,
+				7429EF641D115CB200A59B6E /* Classes */,
+			);
+			path = AVPlayerCacheSupport;
+			sourceTree = "<group>";
+		};
+		7429EF641D115CB200A59B6E /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				7429EF651D115CB200A59B6E /* MCAVPlayerItemCacheFile.h */,
+				7429EF661D115CB200A59B6E /* MCAVPlayerItemCacheFile.m */,
+				7429EF671D115CB200A59B6E /* MCAVPlayerItemCacheLoader.h */,
+				7429EF681D115CB200A59B6E /* MCAVPlayerItemCacheLoader.m */,
+				7429EF691D115CB200A59B6E /* MCAVPlayerItemCacheTask.h */,
+				7429EF6A1D115CB200A59B6E /* MCAVPlayerItemCacheTask.m */,
+				7429EF6B1D115CB200A59B6E /* MCAVPlayerItemLocalCacheTask.h */,
+				7429EF6C1D115CB200A59B6E /* MCAVPlayerItemLocalCacheTask.m */,
+				7429EF6D1D115CB200A59B6E /* MCAVPlayerItemRemoteCacheTask.h */,
+				7429EF6E1D115CB200A59B6E /* MCAVPlayerItemRemoteCacheTask.m */,
+				7429EF6F1D115CB200A59B6E /* MCCacheSupportUtils.h */,
+				7429EF701D115CB200A59B6E /* MCCacheSupportUtils.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -303,17 +354,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7429EF761D115CB200A59B6E /* MCAVPlayerItemRemoteCacheTask.m in Sources */,
 				4D51BDAF1CC4D5BE00090B32 /* ViewController.m in Sources */,
 				4D51BDAC1CC4D5BE00090B32 /* AppDelegate.m in Sources */,
 				745F2FE61CE46E33008DD7EA /* MMSuperViewController.m in Sources */,
 				7429EF591D112E2400A59B6E /* VIResourceLoaderManager.m in Sources */,
 				74328DA61CFD664500E3E735 /* CustomeView.m in Sources */,
+				7429EF711D115CB200A59B6E /* AVPlayerItem+MCCacheSupport.m in Sources */,
+				7429EF741D115CB200A59B6E /* MCAVPlayerItemCacheTask.m in Sources */,
 				7431DC851CEAC5C900BDEAC2 /* MMPlayerView.m in Sources */,
+				7429EF731D115CB200A59B6E /* MCAVPlayerItemCacheLoader.m in Sources */,
 				7429EF5A1D112E2400A59B6E /* VIResourceLoadingRequestWorker.m in Sources */,
 				7429EF5B1D112E2400A59B6E /* VICacheAction.m in Sources */,
 				7429EF5D1D112E2400A59B6E /* VICacheManager.m in Sources */,
 				4DE9C9321CDC8434000DDECD /* SecondeViewController.m in Sources */,
+				7429EF771D115CB200A59B6E /* MCCacheSupportUtils.m in Sources */,
+				7429EF721D115CB200A59B6E /* MCAVPlayerItemCacheFile.m in Sources */,
 				7429EF5F1D112E2400A59B6E /* VIMediaCacheWorker.m in Sources */,
+				7429EF751D115CB200A59B6E /* MCAVPlayerItemLocalCacheTask.m in Sources */,
 				4D51BDA91CC4D5BE00090B32 /* main.m in Sources */,
 				7429EF5C1D112E2400A59B6E /* VICacheConfiguration.m in Sources */,
 				7429EF5E1D112E2400A59B6E /* VICacheSessionManager.m in Sources */,

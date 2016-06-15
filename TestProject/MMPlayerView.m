@@ -9,6 +9,8 @@
 #import "MMPlayerView.h"
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
+#import "VIMediaCache.h"
+#import "AVPlayerItem+MCCacheSupport.h"
 
 // 枚举值，包含水平移动方向和垂直移动方向
 typedef NS_ENUM(NSInteger, PanGestureDirection){
@@ -77,8 +79,8 @@ typedef NS_ENUM(NSInteger, PanGestureDirection){
 /** 定义一个实例变量，保存枚举值 */
 @property (assign, nonatomic) PanGestureDirection panDirection;
 
-
-
+/** 缓存管理对象 **/
+@property (strong, nonatomic) VIResourceLoaderManager *resourceLoaderManager;
 @end
 
 @implementation MMPlayerView
@@ -153,6 +155,14 @@ typedef NS_ENUM(NSInteger, PanGestureDirection){
     return self.player && self.player.rate == 1.0;
 }
 
+//缓存管理对象
+-(VIResourceLoaderManager *)resourceLoaderManager {
+    if (!_resourceLoaderManager) {
+        _resourceLoaderManager = [[VIResourceLoaderManager alloc] init];
+    }
+    return _resourceLoaderManager;
+}
+
 
 //是否全屏
 - (void)setIsFullScreen:(BOOL)isFullScreen {
@@ -177,7 +187,8 @@ typedef NS_ENUM(NSInteger, PanGestureDirection){
     [self endPreviousPlay];
     
     // 创建AVPlayer
-    AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL:mediaURL];
+    NSError *error;
+    AVPlayerItem *playerItem = [AVPlayerItem mc_playerItemWithRemoteURL:mediaURL error:&error];
     self.player = [AVPlayer playerWithPlayerItem:playerItem];
     self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
 
