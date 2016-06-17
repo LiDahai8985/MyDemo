@@ -15,28 +15,12 @@
 		4D51BDB41CC4D5BE00090B32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D51BDB31CC4D5BE00090B32 /* Assets.xcassets */; };
 		4DE9C92F1CDC7E3B000DDECD /* MMNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE9C92E1CDC7E3B000DDECD /* MMNavigationController.m */; };
 		4DE9C9321CDC8434000DDECD /* SecondeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE9C9311CDC8434000DDECD /* SecondeViewController.m */; };
-		7429EF561D112E2400A59B6E /* VIContentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF3F1D112E2400A59B6E /* VIContentInfo.m */; };
-		7429EF571D112E2400A59B6E /* VIMediaDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF411D112E2400A59B6E /* VIMediaDownloader.m */; };
-		7429EF581D112E2400A59B6E /* VIResourceLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF431D112E2400A59B6E /* VIResourceLoader.m */; };
-		7429EF591D112E2400A59B6E /* VIResourceLoaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF451D112E2400A59B6E /* VIResourceLoaderManager.m */; };
-		7429EF5A1D112E2400A59B6E /* VIResourceLoadingRequestWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF471D112E2400A59B6E /* VIResourceLoadingRequestWorker.m */; };
-		7429EF5B1D112E2400A59B6E /* VICacheAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF4A1D112E2400A59B6E /* VICacheAction.m */; };
-		7429EF5C1D112E2400A59B6E /* VICacheConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF4C1D112E2400A59B6E /* VICacheConfiguration.m */; };
-		7429EF5D1D112E2400A59B6E /* VICacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF4E1D112E2400A59B6E /* VICacheManager.m */; };
-		7429EF5E1D112E2400A59B6E /* VICacheSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF501D112E2400A59B6E /* VICacheSessionManager.m */; };
-		7429EF5F1D112E2400A59B6E /* VIMediaCacheWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF521D112E2400A59B6E /* VIMediaCacheWorker.m */; };
-		7429EF601D112E2400A59B6E /* VIURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF541D112E2400A59B6E /* VIURLProtocol.m */; };
-		7429EF711D115CB200A59B6E /* AVPlayerItem+MCCacheSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF631D115CB200A59B6E /* AVPlayerItem+MCCacheSupport.m */; };
-		7429EF721D115CB200A59B6E /* MCAVPlayerItemCacheFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF661D115CB200A59B6E /* MCAVPlayerItemCacheFile.m */; };
-		7429EF731D115CB200A59B6E /* MCAVPlayerItemCacheLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF681D115CB200A59B6E /* MCAVPlayerItemCacheLoader.m */; };
-		7429EF741D115CB200A59B6E /* MCAVPlayerItemCacheTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF6A1D115CB200A59B6E /* MCAVPlayerItemCacheTask.m */; };
-		7429EF751D115CB200A59B6E /* MCAVPlayerItemLocalCacheTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF6C1D115CB200A59B6E /* MCAVPlayerItemLocalCacheTask.m */; };
-		7429EF761D115CB200A59B6E /* MCAVPlayerItemRemoteCacheTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF6E1D115CB200A59B6E /* MCAVPlayerItemRemoteCacheTask.m */; };
-		7429EF771D115CB200A59B6E /* MCCacheSupportUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 7429EF701D115CB200A59B6E /* MCCacheSupportUtils.m */; };
 		7431DC851CEAC5C900BDEAC2 /* MMPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7431DC831CEAC5C900BDEAC2 /* MMPlayerView.m */; };
 		7431DC861CEAC5C900BDEAC2 /* MMPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7431DC841CEAC5C900BDEAC2 /* MMPlayerView.xib */; };
 		74328DA61CFD664500E3E735 /* CustomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74328DA51CFD664500E3E735 /* CustomeView.m */; };
 		743E7F621CFBEA2400299AE6 /* mm10.png in Resources */ = {isa = PBXBuildFile; fileRef = 743E7F611CFBEA2400299AE6 /* mm10.png */; };
+		7444CADD1D1395AE00E8C3CC /* MMResourceLoaderURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7444CADC1D1395AE00E8C3CC /* MMResourceLoaderURLConnection.m */; };
+		7444CAE01D13963A00E8C3CC /* MMMediaRequestTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 7444CADF1D13963A00E8C3CC /* MMMediaRequestTask.m */; };
 		745F2FE61CE46E33008DD7EA /* MMSuperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 745F2FE51CE46E33008DD7EA /* MMSuperViewController.m */; };
 		746B3FEF1CE9693800886264 /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746B3FEE1CE9693800886264 /* ThirdViewController.m */; };
 		746B3FF21CE96EFC00886264 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 746B3FF01CE96EFC00886264 /* Main.storyboard */; };
@@ -63,49 +47,16 @@
 		4DE9C92E1CDC7E3B000DDECD /* MMNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMNavigationController.m; sourceTree = "<group>"; };
 		4DE9C9301CDC8434000DDECD /* SecondeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondeViewController.h; sourceTree = "<group>"; };
 		4DE9C9311CDC8434000DDECD /* SecondeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondeViewController.m; sourceTree = "<group>"; };
-		7429EF3E1D112E2400A59B6E /* VIContentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIContentInfo.h; sourceTree = "<group>"; };
-		7429EF3F1D112E2400A59B6E /* VIContentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIContentInfo.m; sourceTree = "<group>"; };
-		7429EF401D112E2400A59B6E /* VIMediaDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIMediaDownloader.h; sourceTree = "<group>"; };
-		7429EF411D112E2400A59B6E /* VIMediaDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIMediaDownloader.m; sourceTree = "<group>"; };
-		7429EF421D112E2400A59B6E /* VIResourceLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIResourceLoader.h; sourceTree = "<group>"; };
-		7429EF431D112E2400A59B6E /* VIResourceLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIResourceLoader.m; sourceTree = "<group>"; };
-		7429EF441D112E2400A59B6E /* VIResourceLoaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIResourceLoaderManager.h; sourceTree = "<group>"; };
-		7429EF451D112E2400A59B6E /* VIResourceLoaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIResourceLoaderManager.m; sourceTree = "<group>"; };
-		7429EF461D112E2400A59B6E /* VIResourceLoadingRequestWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIResourceLoadingRequestWorker.h; sourceTree = "<group>"; };
-		7429EF471D112E2400A59B6E /* VIResourceLoadingRequestWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIResourceLoadingRequestWorker.m; sourceTree = "<group>"; };
-		7429EF491D112E2400A59B6E /* VICacheAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VICacheAction.h; sourceTree = "<group>"; };
-		7429EF4A1D112E2400A59B6E /* VICacheAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VICacheAction.m; sourceTree = "<group>"; };
-		7429EF4B1D112E2400A59B6E /* VICacheConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VICacheConfiguration.h; sourceTree = "<group>"; };
-		7429EF4C1D112E2400A59B6E /* VICacheConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VICacheConfiguration.m; sourceTree = "<group>"; };
-		7429EF4D1D112E2400A59B6E /* VICacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VICacheManager.h; sourceTree = "<group>"; };
-		7429EF4E1D112E2400A59B6E /* VICacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VICacheManager.m; sourceTree = "<group>"; };
-		7429EF4F1D112E2400A59B6E /* VICacheSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VICacheSessionManager.h; sourceTree = "<group>"; };
-		7429EF501D112E2400A59B6E /* VICacheSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VICacheSessionManager.m; sourceTree = "<group>"; };
-		7429EF511D112E2400A59B6E /* VIMediaCacheWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIMediaCacheWorker.h; sourceTree = "<group>"; };
-		7429EF521D112E2400A59B6E /* VIMediaCacheWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIMediaCacheWorker.m; sourceTree = "<group>"; };
-		7429EF531D112E2400A59B6E /* VIURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIURLProtocol.h; sourceTree = "<group>"; };
-		7429EF541D112E2400A59B6E /* VIURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIURLProtocol.m; sourceTree = "<group>"; };
-		7429EF551D112E2400A59B6E /* VIMediaCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIMediaCache.h; sourceTree = "<group>"; };
-		7429EF621D115CB200A59B6E /* AVPlayerItem+MCCacheSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AVPlayerItem+MCCacheSupport.h"; sourceTree = "<group>"; };
-		7429EF631D115CB200A59B6E /* AVPlayerItem+MCCacheSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVPlayerItem+MCCacheSupport.m"; sourceTree = "<group>"; };
-		7429EF651D115CB200A59B6E /* MCAVPlayerItemCacheFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAVPlayerItemCacheFile.h; sourceTree = "<group>"; };
-		7429EF661D115CB200A59B6E /* MCAVPlayerItemCacheFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAVPlayerItemCacheFile.m; sourceTree = "<group>"; };
-		7429EF671D115CB200A59B6E /* MCAVPlayerItemCacheLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAVPlayerItemCacheLoader.h; sourceTree = "<group>"; };
-		7429EF681D115CB200A59B6E /* MCAVPlayerItemCacheLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAVPlayerItemCacheLoader.m; sourceTree = "<group>"; };
-		7429EF691D115CB200A59B6E /* MCAVPlayerItemCacheTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAVPlayerItemCacheTask.h; sourceTree = "<group>"; };
-		7429EF6A1D115CB200A59B6E /* MCAVPlayerItemCacheTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAVPlayerItemCacheTask.m; sourceTree = "<group>"; };
-		7429EF6B1D115CB200A59B6E /* MCAVPlayerItemLocalCacheTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAVPlayerItemLocalCacheTask.h; sourceTree = "<group>"; };
-		7429EF6C1D115CB200A59B6E /* MCAVPlayerItemLocalCacheTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAVPlayerItemLocalCacheTask.m; sourceTree = "<group>"; };
-		7429EF6D1D115CB200A59B6E /* MCAVPlayerItemRemoteCacheTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAVPlayerItemRemoteCacheTask.h; sourceTree = "<group>"; };
-		7429EF6E1D115CB200A59B6E /* MCAVPlayerItemRemoteCacheTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAVPlayerItemRemoteCacheTask.m; sourceTree = "<group>"; };
-		7429EF6F1D115CB200A59B6E /* MCCacheSupportUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCacheSupportUtils.h; sourceTree = "<group>"; };
-		7429EF701D115CB200A59B6E /* MCCacheSupportUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCacheSupportUtils.m; sourceTree = "<group>"; };
 		7431DC821CEAC5C900BDEAC2 /* MMPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMPlayerView.h; sourceTree = "<group>"; };
 		7431DC831CEAC5C900BDEAC2 /* MMPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMPlayerView.m; sourceTree = "<group>"; };
 		7431DC841CEAC5C900BDEAC2 /* MMPlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MMPlayerView.xib; sourceTree = "<group>"; };
 		74328DA41CFD664500E3E735 /* CustomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomeView.h; sourceTree = "<group>"; };
 		74328DA51CFD664500E3E735 /* CustomeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomeView.m; sourceTree = "<group>"; };
 		743E7F611CFBEA2400299AE6 /* mm10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mm10.png; sourceTree = "<group>"; };
+		7444CADB1D1395AE00E8C3CC /* MMResourceLoaderURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMResourceLoaderURLConnection.h; sourceTree = "<group>"; };
+		7444CADC1D1395AE00E8C3CC /* MMResourceLoaderURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMResourceLoaderURLConnection.m; sourceTree = "<group>"; };
+		7444CADE1D13963A00E8C3CC /* MMMediaRequestTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMediaRequestTask.h; sourceTree = "<group>"; };
+		7444CADF1D13963A00E8C3CC /* MMMediaRequestTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMediaRequestTask.m; sourceTree = "<group>"; };
 		745F2FE41CE46E33008DD7EA /* MMSuperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMSuperViewController.h; sourceTree = "<group>"; };
 		745F2FE51CE46E33008DD7EA /* MMSuperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMSuperViewController.m; sourceTree = "<group>"; };
 		746B3FED1CE9693800886264 /* ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdViewController.h; sourceTree = "<group>"; };
@@ -129,8 +80,6 @@
 		4D51BD9B1CC4D5BE00090B32 = {
 			isa = PBXGroup;
 			children = (
-				7429EF611D115CB200A59B6E /* AVPlayerCacheSupport */,
-				7429EF3C1D112E2400A59B6E /* VIMediaCache */,
 				4D51BDA61CC4D5BE00090B32 /* TestProject */,
 				4D51BDC01CC4D5BE00090B32 /* TestProjectTests */,
 				4D51BDCB1CC4D5BE00090B32 /* TestProjectUITests */,
@@ -152,6 +101,10 @@
 				7431DC821CEAC5C900BDEAC2 /* MMPlayerView.h */,
 				7431DC831CEAC5C900BDEAC2 /* MMPlayerView.m */,
 				7431DC841CEAC5C900BDEAC2 /* MMPlayerView.xib */,
+				7444CADB1D1395AE00E8C3CC /* MMResourceLoaderURLConnection.h */,
+				7444CADC1D1395AE00E8C3CC /* MMResourceLoaderURLConnection.m */,
+				7444CADE1D13963A00E8C3CC /* MMMediaRequestTask.h */,
+				7444CADF1D13963A00E8C3CC /* MMMediaRequestTask.m */,
 				74328DA41CFD664500E3E735 /* CustomeView.h */,
 				74328DA51CFD664500E3E735 /* CustomeView.m */,
 				4D17ACC61CD87379005DE5F7 /* 3.png */,
@@ -204,81 +157,6 @@
 				4D51BDCE1CC4D5BE00090B32 /* Info.plist */,
 			);
 			path = TestProjectUITests;
-			sourceTree = "<group>";
-		};
-		7429EF3C1D112E2400A59B6E /* VIMediaCache */ = {
-			isa = PBXGroup;
-			children = (
-				7429EF3D1D112E2400A59B6E /* ResourceLoader */,
-				7429EF481D112E2400A59B6E /* URLProtocol */,
-				7429EF551D112E2400A59B6E /* VIMediaCache.h */,
-			);
-			path = VIMediaCache;
-			sourceTree = "<group>";
-		};
-		7429EF3D1D112E2400A59B6E /* ResourceLoader */ = {
-			isa = PBXGroup;
-			children = (
-				7429EF3E1D112E2400A59B6E /* VIContentInfo.h */,
-				7429EF3F1D112E2400A59B6E /* VIContentInfo.m */,
-				7429EF401D112E2400A59B6E /* VIMediaDownloader.h */,
-				7429EF411D112E2400A59B6E /* VIMediaDownloader.m */,
-				7429EF421D112E2400A59B6E /* VIResourceLoader.h */,
-				7429EF431D112E2400A59B6E /* VIResourceLoader.m */,
-				7429EF441D112E2400A59B6E /* VIResourceLoaderManager.h */,
-				7429EF451D112E2400A59B6E /* VIResourceLoaderManager.m */,
-				7429EF461D112E2400A59B6E /* VIResourceLoadingRequestWorker.h */,
-				7429EF471D112E2400A59B6E /* VIResourceLoadingRequestWorker.m */,
-			);
-			path = ResourceLoader;
-			sourceTree = "<group>";
-		};
-		7429EF481D112E2400A59B6E /* URLProtocol */ = {
-			isa = PBXGroup;
-			children = (
-				7429EF491D112E2400A59B6E /* VICacheAction.h */,
-				7429EF4A1D112E2400A59B6E /* VICacheAction.m */,
-				7429EF4B1D112E2400A59B6E /* VICacheConfiguration.h */,
-				7429EF4C1D112E2400A59B6E /* VICacheConfiguration.m */,
-				7429EF4D1D112E2400A59B6E /* VICacheManager.h */,
-				7429EF4E1D112E2400A59B6E /* VICacheManager.m */,
-				7429EF4F1D112E2400A59B6E /* VICacheSessionManager.h */,
-				7429EF501D112E2400A59B6E /* VICacheSessionManager.m */,
-				7429EF511D112E2400A59B6E /* VIMediaCacheWorker.h */,
-				7429EF521D112E2400A59B6E /* VIMediaCacheWorker.m */,
-				7429EF531D112E2400A59B6E /* VIURLProtocol.h */,
-				7429EF541D112E2400A59B6E /* VIURLProtocol.m */,
-			);
-			path = URLProtocol;
-			sourceTree = "<group>";
-		};
-		7429EF611D115CB200A59B6E /* AVPlayerCacheSupport */ = {
-			isa = PBXGroup;
-			children = (
-				7429EF621D115CB200A59B6E /* AVPlayerItem+MCCacheSupport.h */,
-				7429EF631D115CB200A59B6E /* AVPlayerItem+MCCacheSupport.m */,
-				7429EF641D115CB200A59B6E /* Classes */,
-			);
-			path = AVPlayerCacheSupport;
-			sourceTree = "<group>";
-		};
-		7429EF641D115CB200A59B6E /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				7429EF651D115CB200A59B6E /* MCAVPlayerItemCacheFile.h */,
-				7429EF661D115CB200A59B6E /* MCAVPlayerItemCacheFile.m */,
-				7429EF671D115CB200A59B6E /* MCAVPlayerItemCacheLoader.h */,
-				7429EF681D115CB200A59B6E /* MCAVPlayerItemCacheLoader.m */,
-				7429EF691D115CB200A59B6E /* MCAVPlayerItemCacheTask.h */,
-				7429EF6A1D115CB200A59B6E /* MCAVPlayerItemCacheTask.m */,
-				7429EF6B1D115CB200A59B6E /* MCAVPlayerItemLocalCacheTask.h */,
-				7429EF6C1D115CB200A59B6E /* MCAVPlayerItemLocalCacheTask.m */,
-				7429EF6D1D115CB200A59B6E /* MCAVPlayerItemRemoteCacheTask.h */,
-				7429EF6E1D115CB200A59B6E /* MCAVPlayerItemRemoteCacheTask.m */,
-				7429EF6F1D115CB200A59B6E /* MCCacheSupportUtils.h */,
-				7429EF701D115CB200A59B6E /* MCCacheSupportUtils.m */,
-			);
-			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,34 +232,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7429EF761D115CB200A59B6E /* MCAVPlayerItemRemoteCacheTask.m in Sources */,
+				7444CAE01D13963A00E8C3CC /* MMMediaRequestTask.m in Sources */,
 				4D51BDAF1CC4D5BE00090B32 /* ViewController.m in Sources */,
 				4D51BDAC1CC4D5BE00090B32 /* AppDelegate.m in Sources */,
 				745F2FE61CE46E33008DD7EA /* MMSuperViewController.m in Sources */,
-				7429EF591D112E2400A59B6E /* VIResourceLoaderManager.m in Sources */,
 				74328DA61CFD664500E3E735 /* CustomeView.m in Sources */,
-				7429EF711D115CB200A59B6E /* AVPlayerItem+MCCacheSupport.m in Sources */,
-				7429EF741D115CB200A59B6E /* MCAVPlayerItemCacheTask.m in Sources */,
 				7431DC851CEAC5C900BDEAC2 /* MMPlayerView.m in Sources */,
-				7429EF731D115CB200A59B6E /* MCAVPlayerItemCacheLoader.m in Sources */,
-				7429EF5A1D112E2400A59B6E /* VIResourceLoadingRequestWorker.m in Sources */,
-				7429EF5B1D112E2400A59B6E /* VICacheAction.m in Sources */,
-				7429EF5D1D112E2400A59B6E /* VICacheManager.m in Sources */,
 				4DE9C9321CDC8434000DDECD /* SecondeViewController.m in Sources */,
-				7429EF771D115CB200A59B6E /* MCCacheSupportUtils.m in Sources */,
-				7429EF721D115CB200A59B6E /* MCAVPlayerItemCacheFile.m in Sources */,
-				7429EF5F1D112E2400A59B6E /* VIMediaCacheWorker.m in Sources */,
-				7429EF751D115CB200A59B6E /* MCAVPlayerItemLocalCacheTask.m in Sources */,
 				4D51BDA91CC4D5BE00090B32 /* main.m in Sources */,
-				7429EF5C1D112E2400A59B6E /* VICacheConfiguration.m in Sources */,
-				7429EF5E1D112E2400A59B6E /* VICacheSessionManager.m in Sources */,
 				7494DAC61CF309BA00D7EF0A /* FourthViewController.m in Sources */,
-				7429EF561D112E2400A59B6E /* VIContentInfo.m in Sources */,
-				7429EF571D112E2400A59B6E /* VIMediaDownloader.m in Sources */,
 				746B3FEF1CE9693800886264 /* ThirdViewController.m in Sources */,
-				7429EF601D112E2400A59B6E /* VIURLProtocol.m in Sources */,
-				7429EF581D112E2400A59B6E /* VIResourceLoader.m in Sources */,
 				4DE9C92F1CDC7E3B000DDECD /* MMNavigationController.m in Sources */,
+				7444CADD1D1395AE00E8C3CC /* MMResourceLoaderURLConnection.m in Sources */,
 				4D17ACC51CD83602005DE5F7 /* FirstViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
-#import "VIMediaCache.h"
+
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {

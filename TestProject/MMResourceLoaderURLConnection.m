@@ -1,0 +1,210 @@
+//
+//  MMResourceLoaderURLConnection.m
+//  MyDemo
+//
+//  Created by LiDaHai on 16/6/17.
+//  Copyright © 2016年 LiDaHai. All rights reserved.
+//
+
+#import "MMResourceLoaderURLConnection.h"
+#import <MobileCoreServices/MobileCoreServices.h>
+
+@interface MMResourceLoaderURLConnection ()
+
+@property (nonatomic, strong) NSMutableArray *pendingRequests;
+@property (nonatomic, copy  ) NSString       *mediaPath;
+
+@end
+
+@implementation MMResourceLoaderURLConnection
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _pendingRequests = [NSMutableArray array];
+        NSString *document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
+        _mediaPath = [document stringByAppendingPathComponent:@"temp.mp4"];
+    }
+    return self;
+}
+
+- (void)fillInContentInformation:(AVAssetResourceLoadingContentInformationRequest *)contentInformationRequest
+{
+    NSString *mimeType = self.task.mimeType;
+    CFStringRef contentType = UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, (__bridge CFStringRef)(mimeType), NULL);
+    contentInformationRequest.byteRangeAccessSupported = YES;
+    contentInformationRequest.contentType = CFBridgingRelease(contentType);
+    contentInformationRequest.contentLength = self.task.mediaLength;
+}
+
+#pragma mark - AVURLAsset resource loader methods
+
+//对存放所有的请求的数组进行处理
+- (void)processPendingRequests
+{
+    //请求完成的数组
+    NSMutableArray *requestsCompleted = [NSMutableArray array];
+    
+    //每次下载一块数据都是一次请求，把这些请求放到数组，遍历数组
+    for (AVAssetResourceLoadingRequest *loadingRequest in self.pendingRequests)
+    {
+        //对每次请求加上长度，文件类型等信息
+        [self fillInContentInformation:loadingRequest.contentInformationRequest];
+        
+        //判断此次请求的数据是否处理完全
+        BOOL didRespondCompletely = [self respondWithDataForRequest:loadingRequest.dataRequest];
+        
+        //如果完整，把此次请求放进 请求完成的数组
+        if (didRespondCompletely) {
+            [requestsCompleted addObject:loadingRequest];
+            [loadingRequest finishLoading];
+        }
+    }
+    
+    //在所有请求的数组中移除已经完成的
+    [self.pendingRequests removeObjectsInArray:requestsCompleted];
+}
+
+/***********  注
+ ***********  意
+ ***********
+ ******       对请求地址进行自定义scheme，非自定义的URL Scheme不会触发AVAssetResourceLoader的delegate方法
+ ***********
+ ***********  注
+ ***********  意
+ ******/
+- (NSURL *)getSchemeVideoURL:(NSURL *)url
+{
+    NSURLComponents *components = [[NSURLComponents alloc] initWithURL:url resolvingAgainstBaseURL:NO];
+    components.scheme = @"streaming";
+    return [components URL];
+}
+
+
+/**
+ *  是否需要请求数据
+ */
+- (BOOL)respondWithDataForRequest:(AVAssetResourceLoadingDataRequest *)dataRequest
+{
+    long long startOffset = dataRequest.requestedOffset;
+    
+    if (dataRequest.currentOffset != 0) {
+        startOffset = dataRequest.currentOffset;
+    }
+    
+    /**意思是当前这个url请求的起始位置+已经下载的长度 < 新请求的起始位置。
+     比如当前是从10分钟的位置开始下载，下载了5分钟，到了15分钟的位置，然后
+     这时拖动滑竿，如果滑竿停止的位置在15分钟的前面，那么不需要建立新的请求
+     */
+    if ((self.task.offset + self.task.downLoadingOffset) < startOffset)
+    {
+        //NSLog(@"NO DATA FOR REQUEST");
+        return NO;
+    }
+    
+    //小于已缓存的数据时，不发送请求
+    if (startOffset < self.task.offset) {
+        return NO;
+    }
+    
+    NSData *filedata = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:_mediaPath] options:NSDataReadingMappedIfSafe error:nil];
+    
+    // This is the total data we have from startOffset to whatever has been downloaded so far
+    NSUInteger unreadBytes = self.task.downLoadingOffset - ((NSInteger)startOffset - self.task.offset);
+    
+    // Respond with whatever is available if we can't satisfy the request fully yet
+    NSUInteger numberOfBytesToRespondWith = MIN((NSUInteger)dataRequest.requestedLength, unreadBytes);
+    
+    
+    [dataRequest respondWithData:[filedata subdataWithRange:NSMakeRange((NSUInteger)startOffset- self.task.offset, (NSUInteger)numberOfBytesToRespondWith)]];
+    
+    
+    long long endOffset = startOffset + dataRequest.requestedLength;
+    BOOL didRespondFully = (self.task.offset + self.task.downLoadingOffset) >= endOffset;
+    
+    return didRespondFully;
+}
+
+
+#pragma mark- AVAssetResourceLoaderDelegate
+/**
+ *  必须返回Yes，如果返回NO，则resourceLoader将会加载出现故障的数据
+ *  这里会出现很多个loadingRequest请求， 需要为每一次请求作出处理
+ *  @param resourceLoader 资源管理器
+ *  @param loadingRequest 每一小块数据的请求
+ *
+ */
+- (BOOL)resourceLoader:(AVAssetResourceLoader *)resourceLoader shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loadingRequest
+{
+    [self.pendingRequests addObject:loadingRequest];
+    [self dealWithLoadingRequest:loadingRequest];
+    //NSLog(@"----%@", loadingRequest);
+    return YES;
+}
+
+
+/**
+ 这个方法发出的请求说明播放器自己关闭了这个请求，我们不需要再对这个请求进行处理，
+ 系统每次结束一个旧的请求，便必然会发出一个或多个新的请求，除了播放器已经获得整
+ 个视频完整的数据，这时候就不会再发起请求。
+ **/
+- (void)resourceLoader:(AVAssetResourceLoader *)resourceLoader didCancelLoadingRequest:(AVAssetResourceLoadingRequest *)loadingRequest
+{
+    [self.pendingRequests removeObject:loadingRequest];
+    
+}
+
+- (void)dealWithLoadingRequest:(AVAssetResourceLoadingRequest *)loadingRequest
+{
+    NSURL *interceptedURL = [loadingRequest.request URL];
+    NSRange range = NSMakeRange((NSUInteger)loadingRequest.dataRequest.currentOffset, NSUIntegerMax);
+    
+    if (self.task.downLoadingOffset > 0) {
+        [self processPendingRequests];
+    }
+    
+    if (!self.task) {
+        self.task = [[MMMediaRequestTask alloc] init];
+        self.task.m_delegate = self;
+        [self.task setUrl:interceptedURL offset:0];
+    } else {
+        // 如果新的rang的起始位置比当前缓存的位置还大300k，则重新按照range请求数据
+        if (self.task.offset + self.task.downLoadingOffset + 1024 * 300 < range.location ||
+            // 如果往回拖也重新请求
+            range.location < self.task.offset) {
+            [self.task setUrl:interceptedURL offset:range.location];
+        }
+    }
+}
+
+#pragma mark - MMMediaRequestTaskDelegate
+
+- (void)task:(MMMediaRequestTask *)task didReceiveMediaLength:(NSUInteger)mediaLength mimeType:(NSString *)mimeType
+{
+    
+}
+
+- (void)taskDidReceiveMediaData:(MMMediaRequestTask *)task
+{
+    [self processPendingRequests];
+    
+}
+
+- (void)taskDidFinishLoading:(MMMediaRequestTask *)task
+{
+    if ([self.m_delegate respondsToSelector:@selector(loaderDidFinishLoadingWithTask:)]) {
+        [self.m_delegate loaderDidFinishLoadingWithTask:task];
+    }
+}
+
+- (void)taskDidFailLoading:(MMMediaRequestTask *)task WithError:(NSInteger)errorCode
+{
+    if ([self.m_delegate respondsToSelector:@selector(loaderDidFailLoadingWithTask:WithError:)]) {
+        [self.m_delegate loaderDidFailLoadingWithTask:task WithError:errorCode];
+    }
+    
+}
+
+@end
+

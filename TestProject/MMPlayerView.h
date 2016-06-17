@@ -36,9 +36,6 @@ typedef void(^GoBackBlock)(void);
 /** 播放模式 : 单曲循环，列表循环，随机 **/
 @property (nonatomic, assign) MMPlayerCyclicalPattern cyclicalPattern;
 
-/** 播放列表 **/
-@property (nonatomic, copy) NSMutableArray *mmPlayItemList;
-
 /** 当前播放状态 **/
 @property (nonatomic, assign, readonly) BOOL isPlaying;
 

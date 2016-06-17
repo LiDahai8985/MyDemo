@@ -8,7 +8,7 @@
 
 #import "FourthViewController.h"
 #import "MMPlayerView.h"
-#import "VIMediaCache.h"
+
 
 @interface FourthViewController ()
 {
@@ -45,7 +45,6 @@
     
     self.playerView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mediaCacheDidChanged:) name:VICacheManagerDidUpdateCacheNotification object:nil];
     
     self.playerViewHeightConstraint = [NSLayoutConstraint constraintWithItem:self.playerView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:self.view.frame.size.width*9/16];
     
@@ -78,11 +77,11 @@
     
     [self.playerView setMediaURL:[NSURL URLWithString:@"http://baobab.wdjcdn.com/14562919706254.mp4"]];
     
-    NSString *url = @"https://www.baidu.com?q=北京";
-    //url中带中文字符的转意方法下列方法中urL返回为空，urL1为编码后地址
-    NSURL *urL = [NSURL URLWithString:url];
-    NSURL *urL1 = [NSURL URLWithString:[url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
-    NSLog(@"---->urL:%@  ---->urL1:%@",urL,urL1);
+//    NSString *url = @"https://www.baidu.com?q=北京";
+//    //url中带中文字符的转意方法下列方法中urL返回为空，urL1为编码后地址
+//    NSURL *urL = [NSURL URLWithString:url];
+//    NSURL *urL1 = [NSURL URLWithString:[url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+//    NSLog(@"---->urL:%@  ---->urL1:%@",urL,urL1);
     
     [self.view systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     
@@ -190,42 +189,6 @@
     }
     else {
         canEarse = NO;
-    }
-}
-
-#pragma mark - notification
-- (void)mediaCacheDidChanged:(NSNotification *)notification {
-    NSDictionary *userInfo = notification.userInfo;
-    
-    NSArray<NSValue *> *cachedFragments = userInfo[VICacheFragmentsKey];
-    long long contentLength = [userInfo[VICacheContentLengthKey] longLongValue];
-    
-    NSInteger number = 100;
-    NSMutableString *progressStr = [NSMutableString string];
-    
-    [cachedFragments enumerateObjectsUsingBlock:^(NSValue * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSRange range = obj.rangeValue;
-        
-        NSInteger location = roundf((range.location / (double)contentLength) * number);
-        
-        NSInteger progressCount = progressStr.length;
-        [self string:progressStr appendString:@"0" muti:location - progressCount];
-        
-        NSInteger length = roundf((range.length / (double)contentLength) * number);
-        [self string:progressStr appendString:@"1" muti:length];
-        
-        
-        if (idx == cachedFragments.count - 1 && (location + length) <= number + 1) {
-            [self string:progressStr appendString:@"0" muti:number - (length + location)];
-        }
-    }];
-    
-    NSLog(@"progressStr------>%@", progressStr);
-}
-
-- (void)string:(NSMutableString *)string appendString:(NSString *)appendString muti:(NSInteger)muti {
-    for (NSInteger i = 0; i < muti; i++) {
-        [string appendString:appendString];
     }
 }
 
