@@ -10,6 +10,11 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 
+#import "SecondeViewController.h"
+#import "ThirdViewController.h"
+#import "FourthViewController.h"
+#import "FivethViewController.h"
+
 @interface AppDelegate ()
 {
     NSInteger count;
@@ -121,6 +126,36 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
+- (BOOL)application:(UIApplication *)application openURL:(nonnull NSURL *)url options:(nonnull NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+    NSLog(@"-----------Extension打开地址-----------%@",url);
+    
+    if ([url.scheme isEqualToString:@"MyDemo"]) {
+        NSString *idStr = [[[NSString stringWithFormat:@"%@",url] componentsSeparatedByString:@"action="] lastObject];
+        UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+        UIViewController *vc = nil;
+        if ([idStr integerValue] == 101) {
+            //
+            vc = [[SecondeViewController alloc] init];
+            
+        } else if ([idStr integerValue] == 102) {
+            vc = [[ThirdViewController alloc] init];
+        } else if ([idStr integerValue] == 103) {
+            vc = [[FourthViewController alloc] init];
+        } else if ([idStr integerValue] == 104) {
+            vc = [[FivethViewController alloc] init];
+        }
+        
+        if (vc) {
+            [nav pushViewController:vc animated:YES];
+        }
+    }
+    return YES;
+}
+
+
 
 
 @end

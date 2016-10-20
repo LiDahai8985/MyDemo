@@ -42,17 +42,19 @@
     self.title = @"ThirdViewController";
     
     self.musicListArray = [[NSMutableArray alloc] initWithObjects:
-                           @"http://yinyueshiting.baidu.com/data2/music/124645382/440262194400128.mp3?xcode=fe16407595f9b16ae4d6351b3c1b445d",
-                           @"http://file.qianqian.com//data2/music/134371282/134371282.mp3?xcode=56c3bfcfd8f58ed0ee71546b0f38c3ae",
-                           @"http://file.qianqian.com//data2/music/246952557/246952557.mp3?xcode=56c3bfcfd8f58ed0265fb8d128cb5641",
-                           @"http://yinyueshiting.baidu.com/data2/music/124645382/440262194400128.mp3?xcode=fe16407595f9b16ae4d6351b3c1b445d",
-                           @"http://file.qianqian.com//data2/music/134371282/134371282.mp3?xcode=56c3bfcfd8f58ed0ee71546b0f38c3ae",
-                           @"http://file.qianqian.com//data2/music/246952557/246952557.mp3?xcode=56c3bfcfd8f58ed0265fb8d128cb5641",nil];
-
+                           @"http://yinyueshiting.baidu.com/data2/music/124645382/440262194400128.mp3?xcode=6107a9895b5b03693d7cab37c0a62272",
+                            @"http://yinyueshiting.baidu.com/data2/music/0a0e25790c3a5773257927b5a2e11426/260489222/260489119111600128.mp3?xcode=3791a86f4bebb014c7d4e558c0a93524",
+                           @"http://yinyueshiting.baidu.com/data2/music/86bc4ece9550d99b19c947dbf231aecc/267447553/26744746739600128.mp3?xcode=ac00937ba9f9e74d86c86b4d2d72cc37",
+                          nil];
+    
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(msg_routeChangeNotification:)
                                                  name:AVAudioSessionRouteChangeNotification
                                                object:nil];
+    
+    
+    
 }
 
 - (MMPlayerView *)mmPlayer {
@@ -68,7 +70,13 @@
     
     if (!self.mmPlayer.superview) {
         count = 0;
-        self.mmPlayer.mediaURL = [NSURL URLWithString:[self.musicListArray objectAtIndex:count]];
+        NSURL *musicUrl = [NSURL URLWithString:[self.musicListArray objectAtIndex:0]];
+        
+        NSString *string = [NSString stringWithFormat:@"%@",[self.musicListArray objectAtIndex:0]];
+        NSArray *array = [string componentsSeparatedByString:@"/"];
+        NSString *identifierStr = [[NSString stringWithFormat:@"%@",[array lastObject]] substringToIndex:10];
+        
+        [self.mmPlayer setMediaURL:musicUrl identifier:[NSString stringWithFormat:@"%@.mp3",identifierStr]];
         [self.view addSubview:self.mmPlayer];
     }
     NSLog(@"开始播放");
@@ -77,8 +85,13 @@
 - (IBAction)nextMusic:(id)sender {
     count ++;
     
-    NSURL *musicUrl = [NSURL URLWithString:[self.musicListArray objectAtIndex:count%6]];
-    self.mmPlayer.mediaURL = musicUrl;
+    NSURL *musicUrl = [NSURL URLWithString:[self.musicListArray objectAtIndex:count%3]];
+    
+    NSString *string = [NSString stringWithFormat:@"%@",[self.musicListArray objectAtIndex:count%3]];
+    NSArray *array = [string componentsSeparatedByString:@"/"];
+    NSString *identifierStr = [[NSString stringWithFormat:@"%@",[array lastObject]] substringToIndex:10];
+    
+    [self.mmPlayer setMediaURL:musicUrl identifier:[NSString stringWithFormat:@"%@.mp3",identifierStr]];
     
 }
 
@@ -91,8 +104,13 @@
         count --;
     }
     
-    NSURL *musicUrl = [NSURL URLWithString:[self.musicListArray objectAtIndex:count%6]];
-    self.mmPlayer.mediaURL = musicUrl;
+    NSURL *musicUrl = [NSURL URLWithString:[self.musicListArray objectAtIndex:count%3]];
+    
+    NSString *string = [NSString stringWithFormat:@"%@",[self.musicListArray objectAtIndex:count%3]];
+    NSArray *array = [string componentsSeparatedByString:@"/"];
+    NSString *identifierStr = [[NSString stringWithFormat:@"%@",[array lastObject]] substringToIndex:10];
+    
+    [self.mmPlayer setMediaURL:musicUrl identifier:[NSString stringWithFormat:@"%@.mp3",identifierStr]];
 }
 
 - (IBAction)presentAViewController:(id)sender {
@@ -103,6 +121,8 @@
 }
 
 - (IBAction) dismiss:(id)sender {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"12345" object:nil];
     [self dismissViewControllerAnimated:YES completion:^{
         
     }];

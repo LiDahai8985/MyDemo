@@ -283,43 +283,4 @@
 }
 
 
-//- (void)remoteControlReceivedWithEvent:(UIEvent *)event {
-//    if (event.type == UIEventTypeRemoteControl) {
-//        switch (event.subtype) {
-//            case UIEventSubtypeRemoteControlPlay:
-//                NSLog(@"远程控制--播放");
-//                break;
-//            case UIEventSubtypeRemoteControlPause:
-//                NSLog(@"远程控制--暂停");
-//                break;
-//            case UIEventSubtypeRemoteControlStop:
-//                NSLog(@"远程控制--停止");
-//                break;
-//            case UIEventSubtypeRemoteControlTogglePlayPause:
-//                NSLog(@"UIEventSubtypeRemoteControlTogglePlayPause");
-//                break;
-//            case UIEventSubtypeRemoteControlNextTrack:
-//                NSLog(@"远程控制--下一首");
-//                break;
-//            case UIEventSubtypeRemoteControlPreviousTrack:
-//                NSLog(@"远程控制--上一首");
-//                break;
-//            case UIEventSubtypeRemoteControlBeginSeekingForward:
-//                NSLog(@"远程控制--开始快进");
-//                break;
-//            case UIEventSubtypeRemoteControlEndSeekingForward:
-//                NSLog(@"远程控制--停止快进");
-//                break;
-//            case UIEventSubtypeRemoteControlBeginSeekingBackward:
-//                NSLog(@"远程控制--快退");
-//                break;
-//            case UIEventSubtypeRemoteControlEndSeekingBackward:
-//                NSLog(@"远程控制--停止快退");
-//                break;
-//            default:
-//                break;
-//        }
-//    }
-//}
-
 @end

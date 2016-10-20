@@ -27,9 +27,6 @@ typedef void(^GoBackBlock)(void);
 @interface MMPlayerView : UIView
 
 
-/** 视频URL */
-@property (nonatomic, strong) NSURL *mediaURL;
-
 /** 播放器的播放模式 : 音乐， 视频 **/
 @property (nonatomic, assign) MMPlayerContentMode  contentMode;
 
@@ -49,6 +46,8 @@ typedef void(^GoBackBlock)(void);
 /** 类方法创建，用于代码创建View */
 + (instancetype)sharePlayer;
 
+// 设置播放地址和唯一标示
+- (void)setMediaURL:(NSURL *)mediaURL identifier:(NSString *)identfier;
 
 /**
  *  取消延时

@@ -9,7 +9,7 @@
 #import "MMPlayerView.h"
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
-#import "MMResourceLoaderURLConnection.h"
+#import "RIVResourceLoaderURLConnection.h"
 
 // 枚举值，包含水平移动方向和垂直移动方向
 typedef NS_ENUM(NSInteger, PanGestureDirection){
@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger, PanGestureDirection){
     PanGestureDirectionVerticalMoved
 };
 
-@interface MMPlayerView ()<MMResourceLoaderURLConnectionDelegate>
+@interface MMPlayerView ()<RIVResourceLoaderURLConnectionDelegate>
 {
     /** 是否允许隐藏maskView **/
     BOOL        _isAllowDisappearMaskView;
@@ -83,6 +83,9 @@ typedef NS_ENUM(NSInteger, PanGestureDirection){
 /**  用来保存快进的总时长 */
 @property (assign, nonatomic) CGFloat sumTime;
 
+/** 视频URL */
+@property (nonatomic, strong) NSURL *mediaURL;
+
 /** 是否为全屏 **/
 @property (assign, nonatomic) BOOL isFullScreen;
 
@@ -90,7 +93,7 @@ typedef NS_ENUM(NSInteger, PanGestureDirection){
 @property (assign, nonatomic) PanGestureDirection panDirection;
 
 /** 用来缓存的loader **/
-@property (strong, nonatomic) MMResourceLoaderURLConnection *mmResourceLoader;
+@property (strong, nonatomic) RIVResourceLoaderURLConnection *mmResourceLoader;
 
 @end
 
@@ -185,21 +188,15 @@ typedef NS_ENUM(NSInteger, PanGestureDirection){
     }
 }
 
-//用于缓存的loader
-- (MMResourceLoaderURLConnection *)mmResourceLoader {
-    if (!_mmResourceLoader) {
-        _mmResourceLoader = [[MMResourceLoaderURLConnection alloc] init];
-        _mmResourceLoader.m_delegate = self;
-    }
-    return _mmResourceLoader;
-}
 
 //设置播放地址
-- (void)setMediaURL:(NSURL *)mediaURL
+- (void)setMediaURL:(NSURL *)mediaURL identifier:(NSString *)identfier
 {
     //结束之前正在播放的对象
     [self endPreviousPlay];
     
+    self.mmResourceLoader = [[RIVResourceLoaderURLConnection alloc] initWithIdentifier:identfier];
+    self.mmResourceLoader.m_delegate = self;
     // 创建AVPlayer
     NSURL *playItemSchemeUrl = [self.mmResourceLoader getSchemeVideoURL:mediaURL];
     AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:playItemSchemeUrl options:nil];
@@ -293,7 +290,9 @@ typedef NS_ENUM(NSInteger, PanGestureDirection){
     
     //替换当前播放对象为空
     [self.player replaceCurrentItemWithPlayerItem:nil];
+    currentPlayerItem = nil;
 }
+
 
 //获取系统音量
 - (void)configureVolume
@@ -342,16 +341,16 @@ typedef NS_ENUM(NSInteger, PanGestureDirection){
         return;
     }
     
-    UIView *statusBarView = [[UIApplication sharedApplication] valueForKey:@"statusBar"];
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        self.topMaskView.alpha = 0.0f;
-        self.bottomMaskView.alpha = 0.0f;
-        //全屏状态下隐藏状态栏
-        statusBarView.alpha = self.isFullScreen?0.0f:1.0f;
-    }completion:^(BOOL finished) {
-        _isMaskShowing = NO;
-    }];
+//    UIView *statusBarView = [[UIApplication sharedApplication] valueForKey:@"statusBar"];
+//    
+//    [UIView animateWithDuration:0.5 animations:^{
+//        self.topMaskView.alpha = 0.0f;
+//        self.bottomMaskView.alpha = 0.0f;
+//        //全屏状态下隐藏状态栏
+//        statusBarView.alpha = self.isFullScreen?0.0f:1.0f;
+//    }completion:^(BOOL finished) {
+//        _isMaskShowing = NO;
+//    }];
 }
 
 //显示工具栏
@@ -402,13 +401,13 @@ typedef NS_ENUM(NSInteger, PanGestureDirection){
         //防止在滑动快进退的时候时间闪跳
         if (_isAllowDisappearMaskView) {
             
-            NSString *currentTimeStr = [NSString stringWithFormat:@"%02ld:%02ld", proMin, proSec];
+            NSString *currentTimeStr = [NSString stringWithFormat:@"%02ld:%02ld", (long)proMin, (long)proSec];
             //加载状态提示
             if (_player.status == AVPlayerStatusReadyToPlay && ![currentTimeStr isEqualToString:self.currentTimeLabel.text]) {
-                NSLog(@"--111------隐藏--------");
+                //NSLog(@"--111------隐藏--------");
                 [self showActivity:NO];
             } else {
-                NSLog(@"--111------显示--------");
+                //NSLog(@"--111------显示--------");
                 //在没有完成播放的情况下显示activity
                 [self showActivity:!_finishedPlaying];
             }
@@ -419,7 +418,7 @@ typedef NS_ENUM(NSInteger, PanGestureDirection){
             self.currentTimeLabel.text = currentTimeStr;
         }
         
-        self.totalTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", durMin, durSec];
+        self.totalTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", (long)durMin, (long)durSec];
     }
     
 }
@@ -610,7 +609,7 @@ typedef NS_ENUM(NSInteger, PanGestureDirection){
     NSInteger currentMin = _currentSliderTime / 60;//当前秒
     NSInteger currentSec = _currentSliderTime%60;//当前分钟
     
-    self.currentTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", currentMin, currentSec];
+    self.currentTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", (long)currentMin, (long)currentSec];
 }
 
 //slider摁下事件
@@ -886,11 +885,11 @@ typedef NS_ENUM(NSInteger, PanGestureDirection){
 
 #pragma mark - MMResourceLoaderURLConnectionDelegate
 
-- (void)loaderDidFinishLoadingWithTask:(MMMediaRequestTask *)task
+- (void)loaderDidFinishLoadingWithTask:(RIVMediaRequestTask *)task
 {
 }
 
-- (void)loaderDidFailLoadingWithTask:(MMMediaRequestTask *)task WithError:(NSInteger)errorCode
+- (void)loaderDidFailLoadingWithTask:(RIVMediaRequestTask *)task WithError:(NSInteger)errorCode
 {
     NSString *str = nil;
     switch (errorCode) {

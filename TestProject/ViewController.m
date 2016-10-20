@@ -10,10 +10,13 @@
 #import "FirstViewController.h"
 #import "MMNavigationController.h"
 #import "CustomeView.h"
-
+#import "MusicPlayingAnimationView.h"
 
 @interface ViewController ()
-
+{
+    MusicPlayingAnimationView *pathView;
+    BOOL showAnimation;
+}
 
 @end
 
@@ -21,7 +24,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     
     
     self.title = @"Home";
@@ -69,8 +71,8 @@
     
     
     //bezierPath
-    CustomeView *pathView = [[CustomeView alloc] initWithFrame:CGRectMake(50, 300, self.view.frame.size.width - 100, self.view.frame.size.height - 300)];
-    pathView.backgroundColor = [UIColor yellowColor];
+    pathView = [[MusicPlayingAnimationView alloc] initWithFrame:CGRectMake(50, 200, 200, 200)];
+    pathView.backgroundColor = [UIColor blackColor];
     
     [self.view addSubview:pathView];
     
@@ -79,6 +81,8 @@
 
 - (IBAction)btnTapped:(id)sender
 {
+    showAnimation = !showAnimation;
+    [pathView showWithAnimation:showAnimation];
     UIView *statusBarView = [[UIApplication sharedApplication] valueForKey:@"statusBar"];
     UILabel *tipLabel = [[UILabel alloc] initWithFrame:statusBarView.bounds];
     tipLabel.backgroundColor = [UIColor blackColor];

@@ -10,4 +10,11 @@
 
 @interface CustomeView : UIView
 
+- (void)startAnimation;
+
+@end
+
+
+@interface DashLine : CALayer
+
 @end

@@ -6,10 +6,10 @@
 //  Copyright © 2016年 LiDaHai. All rights reserved.
 //
 
-#import "MMMediaRequestTask.h"
+#import "RIVMediaRequestTask.h"
 #import <AVFoundation/AVFoundation.h>
 
-@interface  MMMediaRequestTask () <NSURLConnectionDelegate,AVAssetResourceLoaderDelegate>
+@interface  RIVMediaRequestTask () <NSURLConnectionDelegate,AVAssetResourceLoaderDelegate>
 
 
 @property (nonatomic, strong) NSURLConnection *connection;
@@ -21,25 +21,35 @@
 @property (nonatomic, strong) NSFileHandle    *fileHandle;
 
 //缓存暂时保存路径
-@property (nonatomic, strong) NSString        *tempPath;
+@property (nonatomic, copy)   NSString        *cachePath;
+
+@property (nonatomic, copy)   NSString        *tmpPath;
 
 @end
 
-@implementation MMMediaRequestTask
+@implementation RIVMediaRequestTask
 
-- (instancetype)init
+- (void)dealloc
+{
+    NSLog(@"----- %@释放了 ------",NSStringFromClass([self class]));
+}
+- (instancetype)initWithIdentifier:(NSString *)identifier
 {
     self = [super init];
     if (self) {
         _taskArr = [NSMutableArray array];
         NSString *document = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
-        _tempPath =  [document stringByAppendingPathComponent:@"temp.mp4"];
-        if ([[NSFileManager defaultManager] fileExistsAtPath:_tempPath]) {
-            [[NSFileManager defaultManager] removeItemAtPath:_tempPath error:nil];
-            [[NSFileManager defaultManager] createFileAtPath:_tempPath contents:nil attributes:nil];
+        self.cachePath = [document stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",identifier]];
+        self.tmpPath = [NSString stringWithFormat:@"%@/%@",[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject],identifier];
+        
+        NSLog(@"\n缓存最终文件:%@\n暂时文件：%@",self.cachePath,self.tmpPath);
+        
+        if ([[NSFileManager defaultManager] fileExistsAtPath:self.tmpPath]) {
+            [[NSFileManager defaultManager] removeItemAtPath:self.tmpPath error:nil];
+            [[NSFileManager defaultManager] createFileAtPath:self.tmpPath contents:nil attributes:nil];
             
         } else {
-            [[NSFileManager defaultManager] createFileAtPath:_tempPath contents:nil attributes:nil];
+            [[NSFileManager defaultManager] createFileAtPath:self.tmpPath contents:nil attributes:nil];
         }
         
     }
@@ -53,8 +63,8 @@
     
     //如果建立第二次请求，先移除原来文件，再创建新的
     if (self.taskArr.count > 0) {
-        [[NSFileManager defaultManager] removeItemAtPath:_tempPath error:nil];
-        [[NSFileManager defaultManager] createFileAtPath:_tempPath contents:nil attributes:nil];
+        [[NSFileManager defaultManager] removeItemAtPath:self.tmpPath error:nil];
+        [[NSFileManager defaultManager] createFileAtPath:self.tmpPath contents:nil attributes:nil];
     }
     
     _downLoadingOffset = 0;
@@ -73,14 +83,6 @@
     self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:NO];
     [self.connection setDelegateQueue:[NSOperationQueue mainQueue]];
     [self.connection start];
-    
-}
-
-
-
-- (void)cancel
-{
-    [self.connection cancel];
 }
 
 - (void)continueLoading
@@ -104,16 +106,22 @@
 {
     [self.connection cancel];
     //移除文件
-    [[NSFileManager defaultManager] removeItemAtPath:_tempPath error:nil];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:self.tmpPath]) {
+        NSError *error;
+        [[NSFileManager defaultManager] removeItemAtPath:self.tmpPath error:&error];
+        NSLog(@"错误信息：%@",error);
+    }
+    else
+        NSLog(@"缓存文件移除");
 }
 
 
 
 #pragma mark -  NSURLConnection Delegate Methods
 
+//下载最开始响应
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    _isFinishLoad = NO;
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
     
     NSDictionary *dic = (NSDictionary *)[httpResponse allHeaderFields] ;
@@ -131,7 +139,7 @@
     }
     
     _mediaLength = tmpMediaLength;
-    _mimeType = @"video/mp4";
+    _mimeType = @"media/mp3";
     
     
     if ([self.m_delegate respondsToSelector:@selector(task:didReceiveMediaLength:mimeType:)]) {
@@ -140,10 +148,11 @@
     
     [self.taskArr addObject:connection];
     
-    self.fileHandle = [NSFileHandle fileHandleForWritingAtPath:_tempPath];
+    self.fileHandle = [NSFileHandle fileHandleForWritingAtPath:self.tmpPath];
     
 }
 
+//过程中下载到的数据
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     [self.fileHandle seekToEndOfFile];
@@ -158,16 +167,14 @@
     }
 }
 
+//下载完成
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     if (self.taskArr.count < 2) {
-        _isFinishLoad = YES;
         
         //这里自己写缓存好之后的完整文件需要保存的路径
-        NSString *document = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
-        NSString *movePath =  [document stringByAppendingPathComponent:@"/保存数据.mp4"];
+        BOOL isSuccess = [[NSFileManager defaultManager] moveItemAtPath:self.tmpPath toPath:self.cachePath error:nil];
         
-        BOOL isSuccess = [[NSFileManager defaultManager] copyItemAtPath:_tempPath toPath:movePath error:nil];
         if (isSuccess) {
             //NSLog(@"rename success");
         }else{

@@ -33,6 +33,21 @@
     
     //添加滑动手势
     [self.view addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognizerAction:)]];
+    
+    // 移除某些子viewController
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(msg_viewControllersChanged)
+                                                 name:@"12345"
+                                               object:nil];
+}
+
+- (void)msg_viewControllersChanged
+{
+    
+    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:0];
+    [array addObject:self.viewControllers[1]];
+    [array addObject:self.viewControllers.lastObject];
+    [self setViewControllers:array];
 }
 
 - (void )setMmTopViewController:(UIViewController *)mmTopViewController

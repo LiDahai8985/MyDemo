@@ -75,7 +75,8 @@
     
     self.playerView.heightConstraint = self.playerViewHeightConstraint;
     
-    [self.playerView setMediaURL:[NSURL URLWithString:@"http://baobab.wdjcdn.com/14562919706254.mp4"]];
+   // [self.playerView setMediaURL:[NSURL URLWithString:@"http://baobab.wdjcdn.com/14562919706254.mp4"]];
+    [self.playerView setMediaURL:[NSURL URLWithString:@"http://7xtz76.com1.z0.glb.clouddn.com/song/mv/25/20160813125842526.mp4"] identifier:nil];
     
 //    NSString *url = @"https://www.baidu.com?q=北京";
 //    //url中带中文字符的转意方法下列方法中urL返回为空，urL1为编码后地址
@@ -143,7 +144,7 @@
 //    self.playerViewHeightConstraint.constant = isFullScreen?[[UIApplication sharedApplication] keyWindow].bounds.size.width:100;
 //    isFullScreen = !isFullScreen;
     
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark-

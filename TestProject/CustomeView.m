@@ -8,10 +8,18 @@
 
 #import "CustomeView.h"
 
+@interface CustomeView ()
+
+@property (strong, nonatomic) CALayer *redLayer;
+
+@end
+
 @implementation CustomeView
 
+
+
 - (void)drawRect:(CGRect)rect {
-    
+    /**
     //*****画矩形*****
     //******以（100，200）为左上角原点，10为宽 50为高的矩形******
     //UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectMake(100, 200, 10, 50)];
@@ -102,6 +110,126 @@
     
     //所画路径不填充
     [path stroke];
+    
+    **/
+    
+    
+    
+    CGFloat  lengths[2] = {2,3.5};
+    CGContextRef ref = UIGraphicsGetCurrentContext();
+    CGContextBeginPath(ref);
+    
+    CGContextSetLineWidth(ref, self.frame.size.width);
+    CGContextSetStrokeColorWithColor(ref, [UIColor redColor].CGColor);
+    CGContextSetLineDash(ref, 0, lengths, 2);
+    CGContextMoveToPoint(ref, self.frame.size.width/2, self.frame.size.height);
+    CGContextAddLineToPoint(ref, self.frame.size.width/2, 0);
+    CGContextStrokePath(ref);
+    CGContextClosePath(ref);
+    
+//    CGContextSetLineWidth(ref, 6.0);
+//    CGContextSetStrokeColorWithColor(ref, [UIColor redColor].CGColor);
+//    CGContextSetLineDash(ref, 0, lengths, 2);
+//    CGContextMoveToPoint(ref, 120, 300);
+//    CGContextAddLineToPoint(ref, 120, 276);
+//    CGContextStrokePath(ref);
+//    CGContextClosePath(ref);
+//    
+//    CGContextSetLineWidth(ref, 6.0);
+//    CGContextSetStrokeColorWithColor(ref, [UIColor redColor].CGColor);
+//    CGContextSetLineDash(ref, 0, lengths, 2);
+//    CGContextMoveToPoint(ref, 130, 300);
+//    CGContextAddLineToPoint(ref, 130, 292.5);
+//    CGContextStrokePath(ref);
+//    CGContextClosePath(ref);
+//    
+//    CAReplicatorLayer *layer = [CAReplicatorLayer layer];
+//    
+//    layer.frame = CGRectMake(50, 250, 200, 200);
+//    
+//    layer.backgroundColor = [UIColor lightGrayColor].CGColor;
+//    
+//    [self.layer addSublayer:layer];
+//    
+//    CALayer *bar = [CALayer layer];
+//    
+//    bar.backgroundColor = [UIColor redColor].CGColor;
+//    
+//    bar.bounds = CGRectMake(0, 0, 30, 100);
+//    
+//    bar.position = CGPointMake(15, 200);
+//    
+//    bar.anchorPoint = CGPointMake(0.5, 1);
+//    
+//    [layer addSublayer:bar];
+//    
+//    CABasicAnimation *anim = [CABasicAnimation animation];
+//    
+//    anim.keyPath = @"transform.scale.y";
+//    
+//    anim.toValue = @(0.1);
+//    
+//    anim.autoreverses = YES;
+//    
+//    anim.repeatCount = MAXFLOAT;
+//    
+//    [bar addAnimation:anim forKey:nil];
+//    
+//    // 设置4个子层，3个复制层
+//    layer.instanceCount = 4;
+//    
+//    // 设置复制子层的相对位置，每个x轴相差40
+//    layer.instanceTransform = CATransform3DMakeTranslation(40, 0, 0);
+//    
+//    // 设置复制子层的延迟动画时长
+//    layer.instanceDelay = 0.3;
+}
+
+- (void)startAnimation {
+    if (!self.redLayer) {
+        self.redLayer = [CALayer layer];
+        self.redLayer.bounds = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+        self.redLayer.position = CGPointMake(self.frame.size.width/2, self.frame.size.height);
+        self.redLayer.backgroundColor = [UIColor redColor].CGColor;
+        //[self.redLayer setNeedsDisplay];
+        self.redLayer.anchorPoint = CGPointMake(0.5, 1);
+        [self.layer addSublayer:self.redLayer];
+        
+        self.layer.mask = self.redLayer;
+    }
+    
+        CABasicAnimation *anim = [CABasicAnimation animation];
+    
+        anim.keyPath = @"bounds.size.height";
+    
+        anim.toValue = @(1);
+    
+        anim.autoreverses = YES;
+    
+        anim.repeatCount = MAXFLOAT;
+    
+        [self.layer.mask addAnimation:anim forKey:nil];
+    
+}
+
+@end
+
+
+
+@implementation DashLine
+
+- (void)drawInContext:(CGContextRef)ctx {
+    
+    CGFloat  lengths[2] = {2,0};
+    CGContextBeginPath(ctx);
+    
+    CGContextSetLineWidth(ctx, self.frame.size.width);
+    CGContextSetStrokeColorWithColor(ctx, [UIColor redColor].CGColor);
+    CGContextSetLineDash(ctx, 0, lengths, 2);
+    CGContextMoveToPoint(ctx, self.frame.size.width/2, self.frame.size.height);
+    CGContextAddLineToPoint(ctx, self.frame.size.width/2, 0);
+    CGContextStrokePath(ctx);
+    CGContextClosePath(ctx);
     
 }
 

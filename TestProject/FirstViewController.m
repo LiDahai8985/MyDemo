@@ -10,6 +10,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "SecondeViewController.h"
 
+
 @interface FirstViewController ()
 {
     UIVisualEffectView *_testVisualView;
@@ -43,7 +44,7 @@
     _testVisualView.backgroundColor = [UIColor colorWithRed:0.01 green:0.02 blue:0.03 alpha:0.8];
     _testVisualView.alpha = 0.95;
     
-    [self.view addSubview:_testVisualView];
+    [self.view insertSubview:_testVisualView aboveSubview:_testScrollView];
     
     UIButton *tmpBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     tmpBtn.frame = CGRectMake(50, 80, 100, 40);
