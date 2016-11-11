@@ -11,16 +11,23 @@
 #import "MMNavigationController.h"
 #import "CustomeView.h"
 #import "MusicPlayingAnimationView.h"
+#import "LoadingHUD.h"
 
-@interface ViewController ()
+
+@interface ViewController ()<CAAnimationDelegate>
 {
     MusicPlayingAnimationView *pathView;
     BOOL showAnimation;
 }
 
+@property (weak, nonatomic) IBOutlet UIView *testViewLeft;
+@property (weak, nonatomic) IBOutlet UIView *testViewMid;
+@property (weak, nonatomic) IBOutlet UIView *testViewRight;
+
 @end
 
 @implementation ViewController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,7 +35,9 @@
     
     self.title = @"Home";
     // Do any additional setup after loading the view, typically from a nib.
-//    
+
+    
+    // 线程锁死
 //    NSLog(@"---------->1");
 //    dispatch_async(dispatch_get_main_queue(), ^{
 //        NSLog(@"------------>2");
@@ -71,13 +80,268 @@
     
     
     //bezierPath
-    pathView = [[MusicPlayingAnimationView alloc] initWithFrame:CGRectMake(50, 200, 200, 200)];
+    pathView = [[MusicPlayingAnimationView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, 220, 200, 200)];
     pathView.backgroundColor = [UIColor blackColor];
     
     [self.view addSubview:pathView];
     
+    
+    // 自定义加载动画
+    //[LoadingHUD showHUD];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self performSelector:@selector(startCRoundLoadingAnimation) withObject:nil afterDelay:1];
+    [self performSelector:@selector(startPaperclipLoadingAnimation) withObject:nil afterDelay:1];
+}
+
+// 回形 loading动画
+- (void)startPaperclipLoadingAnimation
+{
+    //    if (self.testViewLeft.frame.size.height < 110) {
+    //        self.testViewLeft.bounds = CGRectMake(0, 0, 110, 110);
+    //    }
+    
+    
+    // 清除上次添加的子视图视图
+    [self.testViewLeft.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    
+    // 方形动画变换到圆形
+    if (self.testViewLeft.bounds.size.height != 100) {
+        CABasicAnimation *cornerAnimation = [CABasicAnimation animationWithKeyPath:@"cornerRadius"];
+        cornerAnimation.toValue = [NSNumber numberWithFloat:50.0];
+        cornerAnimation.duration = 0.3;
+        cornerAnimation.removedOnCompletion = NO;
+        cornerAnimation.fillMode = kCAFillModeForwards;
+        cornerAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+        [self.testViewLeft.layer addAnimation:cornerAnimation forKey:@"cornerAnimation"];
+        [self.testViewRight.layer addAnimation:cornerAnimation forKey:@"cornerAnimation"];
+    }
+
+    
+    //usingSpringWithDamping 阻尼 阻碍越大弹性变化范围越小反之变化越大
+    //initialSpringVelocity  弹簧动画的速率（动力），越大弹簧拉或压的幅度（形变）越大
+    [UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.01 initialSpringVelocity:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.testViewLeft.bounds = CGRectMake(0, 0, 100, 100);
+        self.testViewRight.bounds = CGRectMake(0, 0, 100, 100);
+        [self.testViewLeft layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        
+        
+        CABasicAnimation *opacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+        opacityAnimation.fromValue = @(1);
+        opacityAnimation.toValue = @(0);
+        opacityAnimation.removedOnCompletion = NO;
+        opacityAnimation.fillMode = kCAFillModeForwards;
+        opacityAnimation.duration = 1.5;
+        opacityAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+        [self.testViewRight.layer addAnimation:opacityAnimation forKey:@"opacityAnimation"];
+        
+        // 线条动画
+        
+        CAShapeLayer *lineLayer = [CAShapeLayer layer];
+        
+        UIBezierPath *linePath1 = [UIBezierPath bezierPath];
+        //            [linePath1 moveToPoint:CGPointMake(40, 50)];
+        //            [linePath1 addLineToPoint:CGPointMake(50, 180)];
+        //            [linePath1 addLineToPoint:CGPointMake(200, 180)];
+        //            [linePath1 addLineToPoint:CGPointMake(210, 50)];
+        //
+        //            [linePath1 addLineToPoint:CGPointMake(50, 50)];
+        //            [linePath1 addLineToPoint:CGPointMake(60, 170)];
+        //            [linePath1 addLineToPoint:CGPointMake(190, 170)];
+        //            [linePath1 addLineToPoint:CGPointMake(200, 60)];
+        //
+        //            [linePath1 addLineToPoint:CGPointMake(60, 60)];
+        //            [linePath1 addLineToPoint:CGPointMake(70, 160)];
+        //            [linePath1 addLineToPoint:CGPointMake(180, 160)];
+        //            [linePath1 addLineToPoint:CGPointMake(190, 70)];
+        //
+        //            [linePath1 addLineToPoint:CGPointMake(70, 70)];
+        //            [linePath1 addLineToPoint:CGPointMake(80, 150)];
+        //            [linePath1 addLineToPoint:CGPointMake(170, 150)];
+        //            [linePath1 addLineToPoint:CGPointMake(180, 80)];
+        //
+        //            [linePath1 addLineToPoint:CGPointMake(80, 80)];
+        //            [linePath1 addLineToPoint:CGPointMake(90, 140)];
+        //            [linePath1 addLineToPoint:CGPointMake(160, 140)];
+        //            [linePath1 addLineToPoint:CGPointMake(170, 90)];
+        //
+        //            [linePath1 addLineToPoint:CGPointMake(90, 90)];
+        //            [linePath1 addLineToPoint:CGPointMake(100, 130)];
+        //            [linePath1 addLineToPoint:CGPointMake(150, 130)];
+        //            [linePath1 addLineToPoint:CGPointMake(160, 100)];
+        //
+        //            [linePath1 addLineToPoint:CGPointMake(100, 100)];
+        //            [linePath1 addLineToPoint:CGPointMake(110, 120)];
+        //            [linePath1 addLineToPoint:CGPointMake(140, 120)];
+        //            [linePath1 addLineToPoint:CGPointMake(150, 110)];
+        //
+        //            [linePath1 addLineToPoint:CGPointMake(130, 110)];
+        //            [linePath1 addLineToPoint:CGPointMake(130, 300)];
+        
+        
+        // 绘制路径
+        [linePath1 moveToPoint:CGPointMake(67, 150)];
+        [linePath1 addLineToPoint:CGPointMake(67, 30)];
+        [linePath1 addArcWithCenter:CGPointMake(52, 30) radius:15 startAngle:0 endAngle:(180*M_PI/180.0) clockwise:NO];
+        [linePath1 addLineToPoint:CGPointMake(37, 70)];
+        [linePath1 addArcWithCenter:CGPointMake(47, 70) radius:10 startAngle:(-180*M_PI/180.0) endAngle:0 clockwise:NO];
+        [linePath1 addLineToPoint:CGPointMake(57, 40)];
+        [linePath1 addArcWithCenter:CGPointMake(52, 40) radius:5 startAngle:0 endAngle:(-180*M_PI/180.0) clockwise:NO];
+        [linePath1 addLineToPoint:CGPointMake(47, 100)];
+        
+        lineLayer.path = linePath1.CGPath;
+        lineLayer.strokeColor = [UIColor whiteColor].CGColor;
+        [lineLayer setFillColor:[UIColor clearColor].CGColor];
+        lineLayer.lineCap = kCALineCapRound;
+        lineLayer.lineWidth = 3;
+        lineLayer.lineJoin = kCALineJoinBevel;
+        [self.testViewLeft.layer addSublayer:lineLayer];
+        
+        
+        // 线终点的位置变化
+        CABasicAnimation *lineAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+        lineAnimation.fromValue = @(0.0f);
+        lineAnimation.toValue = @(0.8);
+        lineAnimation.duration = 0.6;
+        lineAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+        lineAnimation.removedOnCompletion = NO;
+        //lineAnimation.repeatCount = INFINITY;
+        lineAnimation.delegate = self;
+        lineAnimation.fillMode = kCAFillModeForwards;
+        [lineAnimation setValue:@"lineAnimation1" forKey:@"lineAnimation1"];
+        [lineLayer addAnimation:lineAnimation forKey:@"lineAnimation1"];
+        
+        // 线的起点位置变化
+        CABasicAnimation *lineAnimation2 = [CABasicAnimation animationWithKeyPath:@"strokeStart"];
+        lineAnimation2.fromValue = @(0.0);
+        lineAnimation2.toValue = @(0.25f);
+        lineAnimation2.duration = 0.65;
+        lineAnimation2.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+        lineAnimation2.removedOnCompletion = NO;
+        lineAnimation2.fillMode = kCAFillModeForwards;
+        [lineLayer addAnimation:lineAnimation2 forKey:@"lineAnimation2"];
+        
+    }];
+
+}
+
+// 追赶形 "C"形圆loading
+- (void)startCRoundLoadingAnimation
+{
+    
+    [self.testViewMid.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        self.testViewMid.bounds = CGRectMake(0, 0, 100, 100);
+        self.testViewMid.layer.cornerRadius = 50;
+        
+        // 线条动画
+        CAShapeLayer *loadingLayer = [CAShapeLayer layer];
+        loadingLayer.lineCap = kCALineJoinRound;
+        loadingLayer.lineWidth = 4;
+        loadingLayer.strokeColor = [UIColor whiteColor].CGColor;
+        loadingLayer.fillColor = [UIColor clearColor].CGColor;
+        
+        [self.testViewMid.layer addSublayer:loadingLayer];
+        
+        UIBezierPath *path = [UIBezierPath bezierPath];
+        [path moveToPoint:CGPointMake(20, 50)];
+        [path addArcWithCenter:CGPointMake(50, 50) radius:30 startAngle:(180*M_PI/180.0) endAngle:-(181*M_PI/180.0) clockwise:YES];
+        
+        loadingLayer.path = path.CGPath;
+        
+        CABasicAnimation *startAnimation = [CABasicAnimation animationWithKeyPath:@"strokeStart"];
+        startAnimation.fromValue = @(0.0);
+        startAnimation.toValue = @(0.1);
+        startAnimation.duration = 0.7;
+        startAnimation.removedOnCompletion = NO;
+        startAnimation.fillMode = kCAFillModeForwards;
+//        startAnimation.repeatCount = INFINITY;
+        startAnimation.delegate = self;
+        startAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+        [startAnimation setValue:@"startAnimation" forKey:@"startAnimation"];
+        [loadingLayer addAnimation:startAnimation forKey:@"startAnimation"];
+        
+        
+        CABasicAnimation *endAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+        endAnimation.fromValue = @(0.05);
+        endAnimation.toValue = @(1.0);
+        endAnimation.duration = 0.7;
+        endAnimation.removedOnCompletion = NO;
+        endAnimation.fillMode = kCAFillModeForwards;
+        endAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+        [loadingLayer addAnimation:endAnimation forKey:@"endAnimation"];
+        
+        
+        CABasicAnimation *transformAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+        transformAnimation.fromValue = @(0);
+        transformAnimation.toValue = @(2*M_PI);
+        transformAnimation.duration = 1.46;
+        transformAnimation.removedOnCompletion = NO;
+        transformAnimation.fillMode = kCAFillModeForwards;
+        transformAnimation.repeatCount = INFINITY;
+        transformAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+        [self.testViewMid.layer addAnimation:transformAnimation forKey:@"transformAnimation"];
+        
+    });
+}
+
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    if ([[anim valueForKey:@"lineAnimation1"] isEqualToString:@"lineAnimation1"]) {
+        for (CALayer *lineLayer in self.testViewLeft.layer.sublayers) {
+            if (lineLayer) {
+                
+                CABasicAnimation *lineAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+                lineAnimation.fromValue = @(0.8f);
+                lineAnimation.toValue = @(1.0);
+                lineAnimation.duration = 0.5;
+                lineAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+                lineAnimation.removedOnCompletion = NO;
+                lineAnimation.delegate = self;
+                lineAnimation.fillMode = kCAFillModeForwards;
+                [lineLayer addAnimation:lineAnimation forKey:@"lineAnimation11"];
+                
+                CABasicAnimation *lineAnimation22 = [CABasicAnimation animationWithKeyPath:@"strokeStart"];
+                lineAnimation22.fromValue = @(0.25);
+                lineAnimation22.toValue = @(1.0f);
+                lineAnimation22.duration = 0.7;
+                lineAnimation22.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+                lineAnimation22.removedOnCompletion = NO;
+                lineAnimation22.fillMode = kCAFillModeForwards;
+                lineAnimation22.delegate = self;
+                [lineAnimation22 setValue:@"lineAnimation22" forKey:@"lineAnimation22"];
+                [lineLayer addAnimation:lineAnimation22 forKey:@"lineAnimation22"];
+            }
+        }
+    } else if ([[anim valueForKey:@"lineAnimation22"] isEqualToString:@"lineAnimation22"]) {
+        [self startPaperclipLoadingAnimation];
+    } else if ([[anim valueForKey:@"startAnimation"] isEqualToString:@"startAnimation"]) {
+        for (CALayer *lineLayer in self.testViewMid.layer.sublayers) {
+            if (lineLayer) {
+                
+                CABasicAnimation *startAnimation1 = [CABasicAnimation animationWithKeyPath:@"strokeStart"];
+                startAnimation1.fromValue = @(0.1);
+                startAnimation1.toValue = @(0.95f);
+                startAnimation1.duration = 0.8;
+                startAnimation1.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+                startAnimation1.removedOnCompletion = NO;
+                startAnimation1.fillMode = kCAFillModeForwards;
+                startAnimation1.delegate = self;
+                [startAnimation1 setValue:@"strokeStart1" forKey:@"strokeStart1"];
+                [lineLayer addAnimation:startAnimation1 forKey:@"strokeStart1"];
+            }
+        }
+    } else if ([[anim valueForKey:@"strokeStart1"] isEqualToString:@"strokeStart1"]) {
+        [self startCRoundLoadingAnimation];
+    }
+}
 
 - (IBAction)btnTapped:(id)sender
 {

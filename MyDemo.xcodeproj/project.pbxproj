@@ -30,7 +30,11 @@
 		746AAE8D1DB720A300F234CF /* MyTodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 746AAE811DB720A300F234CF /* MyTodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		746B3FEF1CE9693800886264 /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746B3FEE1CE9693800886264 /* ThirdViewController.m */; };
 		746B3FF21CE96EFC00886264 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 746B3FF01CE96EFC00886264 /* Main.storyboard */; };
+		748A58511DD17D19003DD700 /* LoadingHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 748A58501DD17D19003DD700 /* LoadingHUD.m */; };
 		7494DAC61CF309BA00D7EF0A /* FourthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7494DAC51CF309BA00D7EF0A /* FourthViewController.m */; };
+		74A981BD1DCC672800945293 /* AutoHeightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A981BC1DCC672800945293 /* AutoHeightCell.m */; };
+		74E3A1281DBDA80F00F6B4C2 /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E3A1271DBDA80F00F6B4C2 /* NotificationService.m */; };
+		74E3A12C1DBDA80F00F6B4C2 /* MyNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 74E3A1241DBDA80F00F6B4C2 /* MyNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		74F7FD231D1B93BA006962F8 /* MusicPlayingAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F7FD221D1B93BA006962F8 /* MusicPlayingAnimationView.m */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +46,13 @@
 			remoteGlobalIDString = 746AAE801DB720A300F234CF;
 			remoteInfo = MyTodayExtension;
 		};
+		74E3A12A1DBDA80F00F6B4C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4D51BD9C1CC4D5BE00090B32 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 74E3A1231DBDA80F00F6B4C2;
+			remoteInfo = MyNotificationServiceExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -52,6 +63,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				746AAE8D1DB720A300F234CF /* MyTodayExtension.appex in Embed App Extensions */,
+				74E3A12C1DBDA80F00F6B4C2 /* MyNotificationServiceExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,9 +112,17 @@
 		746B3FED1CE9693800886264 /* ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdViewController.h; sourceTree = "<group>"; };
 		746B3FEE1CE9693800886264 /* ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdViewController.m; sourceTree = "<group>"; };
 		746B3FF11CE96EFC00886264 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = TestProject/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		748A584F1DD17D19003DD700 /* LoadingHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingHUD.h; sourceTree = "<group>"; };
+		748A58501DD17D19003DD700 /* LoadingHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingHUD.m; sourceTree = "<group>"; };
 		7494DAC41CF309BA00D7EF0A /* FourthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourthViewController.h; sourceTree = "<group>"; };
 		7494DAC51CF309BA00D7EF0A /* FourthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourthViewController.m; sourceTree = "<group>"; };
+		74A981BB1DCC672800945293 /* AutoHeightCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoHeightCell.h; sourceTree = "<group>"; };
+		74A981BC1DCC672800945293 /* AutoHeightCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoHeightCell.m; sourceTree = "<group>"; };
 		74ADC6241DB75FEC00E0494E /* MyDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyDemo.entitlements; sourceTree = "<group>"; };
+		74E3A1241DBDA80F00F6B4C2 /* MyNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MyNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		74E3A1261DBDA80F00F6B4C2 /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
+		74E3A1271DBDA80F00F6B4C2 /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
+		74E3A1291DBDA80F00F6B4C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		74F7FD211D1B93BA006962F8 /* MusicPlayingAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicPlayingAnimationView.h; sourceTree = "<group>"; };
 		74F7FD221D1B93BA006962F8 /* MusicPlayingAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicPlayingAnimationView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,6 +143,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		74E3A1211DBDA80F00F6B4C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -132,6 +159,7 @@
 				74ADC6241DB75FEC00E0494E /* MyDemo.entitlements */,
 				4D51BDA61CC4D5BE00090B32 /* TestProject */,
 				746AAE831DB720A300F234CF /* MyTodayExtension */,
+				74E3A1251DBDA80F00F6B4C2 /* MyNotificationServiceExtension */,
 				746AAE6B1DB71D7300F234CF /* Frameworks */,
 				4D51BDA51CC4D5BE00090B32 /* Products */,
 			);
@@ -142,6 +170,7 @@
 			children = (
 				4D51BDA41CC4D5BE00090B32 /* MyDemo.app */,
 				746AAE811DB720A300F234CF /* MyTodayExtension.appex */,
+				74E3A1241DBDA80F00F6B4C2 /* MyNotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,17 +178,8 @@
 		4D51BDA61CC4D5BE00090B32 /* TestProject */ = {
 			isa = PBXGroup;
 			children = (
-				7431DC821CEAC5C900BDEAC2 /* MMPlayerView.h */,
-				7431DC831CEAC5C900BDEAC2 /* MMPlayerView.m */,
-				7431DC841CEAC5C900BDEAC2 /* MMPlayerView.xib */,
-				7444CADB1D1395AE00E8C3CC /* RIVResourceLoaderURLConnection.h */,
-				7444CADC1D1395AE00E8C3CC /* RIVResourceLoaderURLConnection.m */,
-				7444CADE1D13963A00E8C3CC /* RIVMediaRequestTask.h */,
-				7444CADF1D13963A00E8C3CC /* RIVMediaRequestTask.m */,
-				74328DA41CFD664500E3E735 /* CustomeView.h */,
-				74328DA51CFD664500E3E735 /* CustomeView.m */,
-				74F7FD211D1B93BA006962F8 /* MusicPlayingAnimationView.h */,
-				74F7FD221D1B93BA006962F8 /* MusicPlayingAnimationView.m */,
+				74A981BA1DCC668000945293 /* Player */,
+				74A981B91DCC665400945293 /* Views */,
 				4D17ACC61CD87379005DE5F7 /* 3.png */,
 				743E7F611CFBEA2400299AE6 /* mm10.png */,
 				4D51BDAA1CC4D5BE00090B32 /* AppDelegate.h */,
@@ -180,8 +200,6 @@
 				7494DAC51CF309BA00D7EF0A /* FourthViewController.m */,
 				740B4E451DB5CDD100F1CA06 /* FivethViewController.h */,
 				740B4E461DB5CDD100F1CA06 /* FivethViewController.m */,
-				746A626A1D583E5E000627BB /* BlurSwipImgView.h */,
-				746A626B1D583E5E000627BB /* BlurSwipImgView.m */,
 				746B3FF01CE96EFC00886264 /* Main.storyboard */,
 				4D51BDB31CC4D5BE00090B32 /* Assets.xcassets */,
 				4D51BDB81CC4D5BE00090B32 /* Info.plist */,
@@ -218,6 +236,47 @@
 			path = MyTodayExtension;
 			sourceTree = "<group>";
 		};
+		74A981B91DCC665400945293 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				748A584F1DD17D19003DD700 /* LoadingHUD.h */,
+				748A58501DD17D19003DD700 /* LoadingHUD.m */,
+				74328DA41CFD664500E3E735 /* CustomeView.h */,
+				74328DA51CFD664500E3E735 /* CustomeView.m */,
+				74F7FD211D1B93BA006962F8 /* MusicPlayingAnimationView.h */,
+				74F7FD221D1B93BA006962F8 /* MusicPlayingAnimationView.m */,
+				746A626A1D583E5E000627BB /* BlurSwipImgView.h */,
+				746A626B1D583E5E000627BB /* BlurSwipImgView.m */,
+				74A981BB1DCC672800945293 /* AutoHeightCell.h */,
+				74A981BC1DCC672800945293 /* AutoHeightCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		74A981BA1DCC668000945293 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				7431DC821CEAC5C900BDEAC2 /* MMPlayerView.h */,
+				7431DC831CEAC5C900BDEAC2 /* MMPlayerView.m */,
+				7431DC841CEAC5C900BDEAC2 /* MMPlayerView.xib */,
+				7444CADB1D1395AE00E8C3CC /* RIVResourceLoaderURLConnection.h */,
+				7444CADC1D1395AE00E8C3CC /* RIVResourceLoaderURLConnection.m */,
+				7444CADE1D13963A00E8C3CC /* RIVMediaRequestTask.h */,
+				7444CADF1D13963A00E8C3CC /* RIVMediaRequestTask.m */,
+			);
+			name = Player;
+			sourceTree = "<group>";
+		};
+		74E3A1251DBDA80F00F6B4C2 /* MyNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				74E3A1261DBDA80F00F6B4C2 /* NotificationService.h */,
+				74E3A1271DBDA80F00F6B4C2 /* NotificationService.m */,
+				74E3A1291DBDA80F00F6B4C2 /* Info.plist */,
+			);
+			path = MyNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -234,6 +293,7 @@
 			);
 			dependencies = (
 				746AAE8C1DB720A300F234CF /* PBXTargetDependency */,
+				74E3A12B1DBDA80F00F6B4C2 /* PBXTargetDependency */,
 			);
 			name = MyDemo;
 			productName = TestProject;
@@ -255,6 +315,23 @@
 			name = MyTodayExtension;
 			productName = MyTodayExtension;
 			productReference = 746AAE811DB720A300F234CF /* MyTodayExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		74E3A1231DBDA80F00F6B4C2 /* MyNotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 74E3A12F1DBDA80F00F6B4C2 /* Build configuration list for PBXNativeTarget "MyNotificationServiceExtension" */;
+			buildPhases = (
+				74E3A1201DBDA80F00F6B4C2 /* Sources */,
+				74E3A1211DBDA80F00F6B4C2 /* Frameworks */,
+				74E3A1221DBDA80F00F6B4C2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MyNotificationServiceExtension;
+			productName = MyNotificationServiceExtension;
+			productReference = 74E3A1241DBDA80F00F6B4C2 /* MyNotificationServiceExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -286,6 +363,11 @@
 							};
 						};
 					};
+					74E3A1231DBDA80F00F6B4C2 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = PN6M73F9K4;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 4D51BD9F1CC4D5BE00090B32 /* Build configuration list for PBXProject "MyDemo" */;
@@ -303,6 +385,7 @@
 			targets = (
 				4D51BDA31CC4D5BE00090B32 /* MyDemo */,
 				746AAE801DB720A300F234CF /* MyTodayExtension */,
+				74E3A1231DBDA80F00F6B4C2 /* MyNotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -328,6 +411,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		74E3A1221DBDA80F00F6B4C2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -339,6 +429,7 @@
 				4D51BDAF1CC4D5BE00090B32 /* ViewController.m in Sources */,
 				74F7FD231D1B93BA006962F8 /* MusicPlayingAnimationView.m in Sources */,
 				4D51BDAC1CC4D5BE00090B32 /* AppDelegate.m in Sources */,
+				74A981BD1DCC672800945293 /* AutoHeightCell.m in Sources */,
 				745F2FE61CE46E33008DD7EA /* MMSuperViewController.m in Sources */,
 				74328DA61CFD664500E3E735 /* CustomeView.m in Sources */,
 				740B4E471DB5CDD100F1CA06 /* FivethViewController.m in Sources */,
@@ -346,6 +437,7 @@
 				746A626C1D583E5E000627BB /* BlurSwipImgView.m in Sources */,
 				4DE9C9321CDC8434000DDECD /* SecondeViewController.m in Sources */,
 				4D51BDA91CC4D5BE00090B32 /* main.m in Sources */,
+				748A58511DD17D19003DD700 /* LoadingHUD.m in Sources */,
 				7494DAC61CF309BA00D7EF0A /* FourthViewController.m in Sources */,
 				746B3FEF1CE9693800886264 /* ThirdViewController.m in Sources */,
 				4DE9C92F1CDC7E3B000DDECD /* MMNavigationController.m in Sources */,
@@ -362,6 +454,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		74E3A1201DBDA80F00F6B4C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74E3A1281DBDA80F00F6B4C2 /* NotificationService.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -369,6 +469,11 @@
 			isa = PBXTargetDependency;
 			target = 746AAE801DB720A300F234CF /* MyTodayExtension */;
 			targetProxy = 746AAE8B1DB720A300F234CF /* PBXContainerItemProxy */;
+		};
+		74E3A12B1DBDA80F00F6B4C2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 74E3A1231DBDA80F00F6B4C2 /* MyNotificationServiceExtension */;
+			targetProxy = 74E3A12A1DBDA80F00F6B4C2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -563,6 +668,46 @@
 			};
 			name = Release;
 		};
+		74E3A12D1DBDA80F00F6B4C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: LiDaHai Li (RD28A5H9PH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = PN6M73F9K4;
+				INFOPLIST_FILE = MyNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dahai.dahai.MyNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		74E3A12E1DBDA80F00F6B4C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: LiDaHai Li (RD28A5H9PH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = PN6M73F9K4;
+				INFOPLIST_FILE = MyNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dahai.dahai.MyNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -589,6 +734,15 @@
 			buildConfigurations = (
 				746AAE8F1DB720A300F234CF /* Debug */,
 				746AAE901DB720A300F234CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		74E3A12F1DBDA80F00F6B4C2 /* Build configuration list for PBXNativeTarget "MyNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				74E3A12D1DBDA80F00F6B4C2 /* Debug */,
+				74E3A12E1DBDA80F00F6B4C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
