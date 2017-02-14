@@ -11,6 +11,9 @@
 #import "ThirdViewController.h"
 #import <StoreKit/StoreKit.h>
 
+
+#import "HalfPageScrollView.h"
+
 #define ITMS_SANDBOX_VERIFY_RECEIPT_URL @"https://sandbox.itunes.apple.com/verifyReceipt"
 
 @interface SecondeViewController ()<UITextFieldDelegate,SKPaymentTransactionObserver,SKProductsRequestDelegate,ThirdSelectTimeDelegate>
@@ -22,6 +25,7 @@
 @property (strong, nonatomic) IBOutlet UITextField  *productId;
 @property (strong, nonatomic) IBOutlet UIButton     *commitBtn;
 @property (strong, nonatomic) IBOutlet UIButton     *selectTimeBtn;
+@property (nonatomic, strong) HalfPageScrollView    *halfScrollView;
 
 @end
 
@@ -52,10 +56,31 @@
     label.text = @"SecondeViewController";
     [self.view addSubview:label];
     
-    
+    // 注册内购事件响应监听
     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
     self.productId.text = @"com.lljz.token300";
     
+    // 添加半屏滚动scrollView
+    [self.view addSubview:self.halfScrollView];
+    
+    NSArray *imagesArray = @[[UIImage imageNamed:@"3"],
+                             [UIImage imageNamed:@"mm10"],
+                             [UIImage imageNamed:@"3"],
+                             [UIImage imageNamed:@"mm10"],
+                             [UIImage imageNamed:@"3"],];
+    
+    [self.halfScrollView addImages:imagesArray];
+}
+
+// 半屏scrollView
+- (HalfPageScrollView *)halfScrollView
+{
+    if (!_halfScrollView) {
+        _halfScrollView = [[HalfPageScrollView alloc] initWithFrame:CGRectMake(30, 300, 350, 240)];
+        _halfScrollView.backgroundColor = [UIColor redColor];
+        _halfScrollView.clipsToBounds = YES;
+    }
+    return _halfScrollView;
 }
 
 //选择自动关闭时间

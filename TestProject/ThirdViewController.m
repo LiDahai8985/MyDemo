@@ -201,6 +201,7 @@
     }
     
     cell.textLabel.text = [NSString stringWithFormat:@"%ld秒",(indexPath.row+1)*6];
+    cell.textLabel.backgroundColor = [UIColor redColor];
     
     return cell;
 }

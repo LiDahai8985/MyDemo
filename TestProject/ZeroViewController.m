@@ -6,15 +6,18 @@
 //  Copyright © 2016年 douchuanjiang. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "ZeroViewController.h"
 #import "FirstViewController.h"
 #import "MMNavigationController.h"
 #import "CustomeView.h"
 #import "MusicPlayingAnimationView.h"
 #import "LoadingHUD.h"
+#import "NSDate+InternetDateTime.h"
+#import <CoreLocation/CoreLocation.h>
+#import <CoreLocation/CLLocationManager.h>
+#import <sys/sysctl.h>
 
-
-@interface ViewController ()<CAAnimationDelegate>
+@interface ZeroViewController ()<CAAnimationDelegate,CLLocationManagerDelegate,CALayerDelegate>
 {
     MusicPlayingAnimationView *pathView;
     BOOL showAnimation;
@@ -23,10 +26,13 @@
 @property (weak, nonatomic) IBOutlet UIView *testViewLeft;
 @property (weak, nonatomic) IBOutlet UIView *testViewMid;
 @property (weak, nonatomic) IBOutlet UIView *testViewRight;
+@property (weak, nonatomic) IBOutlet CustomeView *customeView;
+@property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) CLLocation *currentLocation;
 
 @end
 
-@implementation ViewController
+@implementation ZeroViewController
 
 
 - (void)viewDidLoad {
@@ -37,6 +43,7 @@
     // Do any additional setup after loading the view, typically from a nib.
 
     
+    [self.locationManager requestWhenInUseAuthorization];
     // 线程锁死
 //    NSLog(@"---------->1");
 //    dispatch_async(dispatch_get_main_queue(), ^{
@@ -80,23 +87,89 @@
     
     
     //bezierPath
-    pathView = [[MusicPlayingAnimationView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - 100, 220, 200, 200)];
+    pathView = [[MusicPlayingAnimationView alloc] initWithFrame:CGRectMake(0, 200, 100, 100)];
     pathView.backgroundColor = [UIColor blackColor];
     
     [self.view addSubview:pathView];
     
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(systemClockDidChange:) name:NSSystemClockDidChangeNotification object:nil];
+    
     // 自定义加载动画
     //[LoadingHUD showHUD];
 }
 
+- (void)systemClockDidChange:(NSNotification *)notification
+{
+    NSLog(@"--->%@",notification);
+}
+
+
+- (time_t)uptime
+{
+//    struct timeval boottime;
+//    int mib[2] = {CTL_KERN, KERN_BOOTTIME};
+//    size_t size = sizeof(boottime);
+//    time_t now;
+//    time_t uptime = -1;
+//    
+//    (void)time(&now);
+//    
+//    if (sysctl(mib, 2, &boottime, &size, NULL, 0) != -1 && boottime.tv_sec != 0)
+//    {
+//        uptime = now - boottime.tv_sec;
+//    }
+//    return uptime;
+    
+    
+    // [NSProcessInfo processInfo].systemUptime
+    // UIApplicationSignificantTimeChangeNotification
+    // http://stackoverflow.com/questions/1444456/is-it-possible-to-get-the-atomic-clock-timestamp-from-the-iphone-gps
+    // http://stackoverflow.com/questions/9564823/internal-clock-in-iphone-background-mode/9744686#9744686
+    // http://stackoverflow.com/questions/12488481/getting-ios-system-uptime-that-doesnt-pause-when-asleep/12490414#12490414
+    // http://stackoverflow.com/questions/10331020/get-the-boot-time-in-objective-c/10331716#10331716
+    struct timeval boottime;
+    size_t size = sizeof(boottime);
+    int ret = sysctlbyname("kern.boottime", &boottime, &size, NULL, 0);
+    assert(ret == 0);
+    return boottime.tv_sec;
+    
+}
+
+- (CLLocationManager *)locationManager
+{
+    if (!_locationManager) {
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+    }
+    return  _locationManager;
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+     didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+    if (locations && locations.count > 0) {
+        self.currentLocation = locations[0];
+        NSLog(@"-----定位成功---");
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+       didFailWithError:(NSError *)error
+{
+    NSLog(@"------定位失败-------%@",error);
+}
+
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    [self performSelector:@selector(startCRoundLoadingAnimation) withObject:nil afterDelay:1];
-    [self performSelector:@selector(startPaperclipLoadingAnimation) withObject:nil afterDelay:1];
+
+    // 执行动画
+//    [self performSelector:@selector(startCRoundLoadingAnimation) withObject:nil afterDelay:1];
+//    [self performSelector:@selector(startPaperclipLoadingAnimation) withObject:nil afterDelay:1];
 }
+
 
 // 回形 loading动画
 - (void)startPaperclipLoadingAnimation
@@ -107,6 +180,7 @@
     
     
     // 清除上次添加的子视图视图
+    [self.testViewLeft.layer.sublayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
     [self.testViewLeft.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
     
     // 方形动画变换到圆形
@@ -142,8 +216,7 @@
         
         // 线条动画
         
-        CAShapeLayer *lineLayer = [CAShapeLayer layer];
-        
+        // 绘制路径
         UIBezierPath *linePath1 = [UIBezierPath bezierPath];
         //            [linePath1 moveToPoint:CGPointMake(40, 50)];
         //            [linePath1 addLineToPoint:CGPointMake(50, 180)];
@@ -194,12 +267,14 @@
         [linePath1 addArcWithCenter:CGPointMake(52, 40) radius:5 startAngle:0 endAngle:(-180*M_PI/180.0) clockwise:NO];
         [linePath1 addLineToPoint:CGPointMake(47, 100)];
         
+        // 绘制线
+        CAShapeLayer *lineLayer = [CAShapeLayer layer];
         lineLayer.path = linePath1.CGPath;
         lineLayer.strokeColor = [UIColor whiteColor].CGColor;
         [lineLayer setFillColor:[UIColor clearColor].CGColor];
-        lineLayer.lineCap = kCALineCapRound;
-        lineLayer.lineWidth = 3;
-        lineLayer.lineJoin = kCALineJoinBevel;
+        lineLayer.lineCap = kCALineCapRound; // 线头形状
+        lineLayer.lineWidth = 3; // 线宽
+        lineLayer.lineJoin = kCALineJoinBevel; // 线段拐点形状
         [self.testViewLeft.layer addSublayer:lineLayer];
         
         
@@ -210,7 +285,7 @@
         lineAnimation.duration = 0.6;
         lineAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
         lineAnimation.removedOnCompletion = NO;
-        //lineAnimation.repeatCount = INFINITY;
+        lineAnimation.repeatCount = INFINITY;
         lineAnimation.delegate = self;
         lineAnimation.fillMode = kCAFillModeForwards;
         [lineAnimation setValue:@"lineAnimation1" forKey:@"lineAnimation1"];
@@ -233,8 +308,10 @@
 // 追赶形 "C"形圆loading
 - (void)startCRoundLoadingAnimation
 {
-    
+    [self.testViewMid.layer.sublayers makeObjectsPerformSelector:@selector(removeAllAnimations)];
     [self.testViewMid.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    [self.testViewMid.layer removeAllAnimations];
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         
         self.testViewMid.bounds = CGRectMake(0, 0, 100, 100);
@@ -345,6 +422,7 @@
 
 - (IBAction)btnTapped:(id)sender
 {
+    /********/
     showAnimation = !showAnimation;
     [pathView showWithAnimation:showAnimation];
     UIView *statusBarView = [[UIApplication sharedApplication] valueForKey:@"statusBar"];
@@ -369,10 +447,21 @@
         });
         
     }];
+    
+    [self.customeView startAnimation];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    
+    NSDate *bootDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:[self uptime]/1000];
+    
+//    CLLocation *location = [[CLLocation alloc] initWithLatitude:self.currentLocation.coordinate.latitude longitude:self.currentLocation.coordinate.longitude];
+    NSLog(@"--------->>>>>>>\nlocationDate:%@\n直接获取的Date:%@\nbootTime:%ld",self.currentLocation.timestamp,[formatter stringFromDate:[NSDate date]],[self uptime]);
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
+    [self.locationManager requestLocation];
     NSLog(@"----->%@",segue.identifier);
     
 }

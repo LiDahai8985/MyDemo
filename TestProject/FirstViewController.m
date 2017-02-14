@@ -11,7 +11,7 @@
 #import "SecondeViewController.h"
 
 
-@interface FirstViewController ()
+@interface FirstViewController ()<UIScrollViewDelegate>
 {
     UIVisualEffectView *_testVisualView;
     UILabel *bottomLabel;
@@ -19,9 +19,11 @@
     BOOL    testFlag;
 }
 
-@property (strong, nonatomic) IBOutlet UILabel *testLabel;
+@property (strong, nonatomic) IBOutlet UIView *testView;
+@property (strong, nonatomic) IBOutlet UIView *testMaskView;
 @property (strong, nonatomic) IBOutlet UIScrollView *testScrollView;
 @property (strong, nonatomic) CALayer *maskLayer;
+@property (strong, nonatomic) CALayer *testViewMaskLayer;
 
 @end
 
@@ -69,12 +71,23 @@
     
     self.maskLayer = [CALayer layer];
     self.maskLayer.anchorPoint = CGPointZero;
-    self.maskLayer.bounds = CGRectMake(0, 0, 0, 25);
+    self.maskLayer.bounds = CGRectMake(0, 0, 0, 35);
     self.maskLayer.backgroundColor = [UIColor whiteColor].CGColor;
     upLabel.layer.mask = self.maskLayer;
     
     self.testScrollView.contentOffset = CGPointMake(self.view.frame.size.width, 0);
     
+//    self.testMaskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 450, 100)];
+//    self.testMaskView.backgroundColor = [UIColor redColor];
+//    self.testView.maskView = self.testMaskView;
+    
+    self.testViewMaskLayer = [CALayer layer];
+    self.testViewMaskLayer.frame = CGRectMake(0, 0, 50, 130);
+    self.testViewMaskLayer.backgroundColor = [UIColor redColor].CGColor;
+    self.testView.layer.mask = self.testViewMaskLayer;
+    
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureHandler:)];
+    [self.testView addGestureRecognizer:pan];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -83,10 +96,10 @@
     self.testScrollView.contentSize = CGSizeMake(self.view.frame.size.width * 3, self.view.frame.size.height);
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    
+- (void)panGestureHandler:(UIPanGestureRecognizer *)pan
+{
+    CGPoint point = [pan locationInView:self.testView];
+    self.testViewMaskLayer.frame = CGRectMake(point.x, 0, 50, 130);
 }
 
 - (IBAction) next:(id)sender
@@ -97,6 +110,11 @@
 
 - (IBAction) startAnimation:(id)sender
 {
+    
+    UIButton *btn = (UIButton *)sender;
+    [btn setTitle:@"测试" forState:UIControlStateNormal];
+    
+    
     testFlag = NO;
 //    CABasicAnimation
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"bounds.size.width"];
@@ -123,9 +141,7 @@
 
 - (void)animationDidStart:(CAAnimation *)anim
 {
-
     NSLog(@"动画开始了");
-    
 }
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
@@ -149,6 +165,7 @@
     testFlag = YES;
    [self.maskLayer removeAnimationForKey:@"MaskAnimation"];
     
+    // 截图
     UIGraphicsBeginImageContextWithOptions([[UIScreen mainScreen] bounds].size, YES, [UIScreen mainScreen].scale);
     [[UIApplication sharedApplication].keyWindow.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
@@ -157,8 +174,16 @@
     UIImageView *newImgView = [[UIImageView alloc] initWithImage:image];
     newImgView.frame = CGRectMake(200, 200, 200, 200*16/9);
     [self.view addSubview:newImgView];
-    
-    
+}
+
+#pragma mark- UIScrollView Delegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y < -30) {
+        scrollView.contentOffset = CGPointMake(0, -30);
+    } else if (scrollView.contentOffset.y > 30) {
+        scrollView.contentOffset = CGPointMake(0, 30);
+    }
 }
 
 @end

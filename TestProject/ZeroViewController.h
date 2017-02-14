@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MMSuperViewController.h"
 
-@interface ViewController : MMSuperViewController
+@interface ZeroViewController : MMSuperViewController
 
 
 @end

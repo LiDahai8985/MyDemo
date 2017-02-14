@@ -11,6 +11,7 @@
 @interface CustomeView ()
 
 @property (strong, nonatomic) CALayer *redLayer;
+@property (strong, nonatomic) UILabel *testLabel;
 
 @end
 
@@ -19,7 +20,7 @@
 
 
 - (void)drawRect:(CGRect)rect {
-    /**
+    
     //*****画矩形*****
     //******以（100，200）为左上角原点，10为宽 50为高的矩形******
     //UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectMake(100, 200, 10, 50)];
@@ -85,6 +86,7 @@
     //CGContextTranslateCTM(ref, 10, 10);
     //******************end**************
     
+    /*
     UIBezierPath *path = [UIBezierPath bezierPath];
     [path moveToPoint:CGPointMake(20, 150)];
     [path addLineToPoint:CGPointMake(50, 233)];
@@ -111,19 +113,18 @@
     //所画路径不填充
     [path stroke];
     
-    **/
+    */
     
     
     
     CGFloat  lengths[2] = {2,3.5};
     CGContextRef ref = UIGraphicsGetCurrentContext();
     CGContextBeginPath(ref);
-    
-    CGContextSetLineWidth(ref, self.frame.size.width);
-    CGContextSetStrokeColorWithColor(ref, [UIColor redColor].CGColor);
-    CGContextSetLineDash(ref, 0, lengths, 2);
-    CGContextMoveToPoint(ref, self.frame.size.width/2, self.frame.size.height);
-    CGContextAddLineToPoint(ref, self.frame.size.width/2, 0);
+    CGContextSetLineWidth(ref, 20); // 线宽（线宽是由线起点往两边延伸的，不是从起点开始往一边延伸的）
+    CGContextSetStrokeColorWithColor(ref, [UIColor redColor].CGColor); // 线条颜色
+    CGContextSetLineDash(ref, 0, lengths, 2); // 虚线规格
+    CGContextMoveToPoint(ref, self.frame.size.width/2, self.frame.size.height); // 起始点
+    CGContextAddLineToPoint(ref, self.frame.size.width/2, 0); // 线段终点
     CGContextStrokePath(ref);
     CGContextClosePath(ref);
     
@@ -177,12 +178,52 @@
 //    
 //    // 设置4个子层，3个复制层
 //    layer.instanceCount = 4;
-//    
+//
 //    // 设置复制子层的相对位置，每个x轴相差40
 //    layer.instanceTransform = CATransform3DMakeTranslation(40, 0, 0);
 //    
 //    // 设置复制子层的延迟动画时长
 //    layer.instanceDelay = 0.3;
+    
+   // UIBezierPath *aPath = [UIBezierPath bezierPath];
+   // [aPath moveToPoint:CGPointMake(120, 200)];
+   // [aPath addArcWithCenter:CGPointMake(60, 200) radius:50 startAngle:0 endAngle:360*(M_PI/180.0) clockwise:YES];
+    
+    
+    CAGradientLayer *colorLayer = [CAGradientLayer layer];
+    colorLayer.colors = @[(id)[UIColor redColor].CGColor,(id)[UIColor whiteColor].CGColor,(id)[UIColor yellowColor].CGColor];
+    colorLayer.frame = CGRectMake(50, 50, 200, 100);
+    colorLayer.locations = @[@0.1,@0.6,@1.0]; // 颜色分布区域 取值均为0~1
+    colorLayer.startPoint = CGPointMake(0, 0);
+    colorLayer.endPoint = CGPointMake(1, 1); // startPoint和endPoint决定颜色渐变方向，取值类似锚点取值，两点连线的方向即是颜色渐变方向
+    [self.layer addSublayer:colorLayer];
+
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(50, 50, 200, 100)];
+    imageView.image = [UIImage imageNamed:@"mm10.png"];
+    //[self addSubview:imageView];
+    
+    colorLayer.mask = self.testLabel.layer;
+}
+
+- (UILabel *)testLabel
+{
+    if (!_testLabel) {
+        _testLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
+        _testLabel.numberOfLines = 0;
+        _testLabel.text = @"阿里看见啊；的咖啡机啊；独守空房就集成显卡V加上地方； 安抚加速度了。地方阿里疯狂， 爱上邓丽君。 法律的阿萨德";
+        [self addSubview:_testLabel];
+    }
+    
+    return _testLabel;
+}
+
+- (void)moveLabel:(UIPanGestureRecognizer *)pan
+{
+    
+    CGPoint point = [pan locationInView:self];
+    self.testLabel.center = point;
+    
+    
 }
 
 - (void)startAnimation {
@@ -191,24 +232,23 @@
         self.redLayer.bounds = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
         self.redLayer.position = CGPointMake(self.frame.size.width/2, self.frame.size.height);
         self.redLayer.backgroundColor = [UIColor redColor].CGColor;
-        //[self.redLayer setNeedsDisplay];
+        [self.redLayer setNeedsDisplay];
         self.redLayer.anchorPoint = CGPointMake(0.5, 1);
-        [self.layer addSublayer:self.redLayer];
         
         self.layer.mask = self.redLayer;
+        
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveLabel:)];
+        [self.testLabel addGestureRecognizer:pan];
     }
     
-        CABasicAnimation *anim = [CABasicAnimation animation];
+     //已经有动画则先移除
+    [self.layer.mask removeAllAnimations];
     
-        anim.keyPath = @"bounds.size.height";
-    
-        anim.toValue = @(1);
-    
-        anim.autoreverses = YES;
-    
-        anim.repeatCount = MAXFLOAT;
-    
-        [self.layer.mask addAnimation:anim forKey:nil];
+    CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"bounds.size.height"];
+    anim.toValue = @(1);
+    anim.autoreverses = YES;
+    anim.repeatCount = MAXFLOAT;
+    [self.layer.mask addAnimation:anim forKey:nil];
     
 }
 
