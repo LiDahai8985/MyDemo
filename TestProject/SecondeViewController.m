@@ -10,7 +10,7 @@
 #import "MMNavigationController.h"
 #import "ThirdViewController.h"
 #import <StoreKit/StoreKit.h>
-
+#import <WebKit/WebKit.h>
 
 #import "HalfPageScrollView.h"
 
@@ -70,6 +70,7 @@
                              [UIImage imageNamed:@"3"],];
     
     [self.halfScrollView addImages:imagesArray];
+    [self.view sendSubviewToBack:self.halfScrollView];
 }
 
 // 半屏scrollView

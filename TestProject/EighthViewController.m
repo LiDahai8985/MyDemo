@@ -38,11 +38,7 @@
             forCellWithReuseIdentifier:NSStringFromClass([EighthCollectionViewCell class])];
     [self.view addSubview:self.collectionView];
     
-    self.dataArray = [NSMutableArray arrayWithObjects:@"红包", @"转账", @"手机充值", @"芝麻信用",
-                      @"天猫", @"生活缴费", @"蚂蚁呗", @"世界那么大",
-                      @"余额宝", @"安全快付", @"蚂蚁聚宝", @"哈哈",@"红包1", @"转账1", @"手机充值1", @"芝麻信用1",
-                      @"天猫1", @"生活缴费1", @"蚂蚁呗1", @"世界那么大1",
-                      @"余额宝1", @"安全快付1", @"蚂蚁聚宝1", @"哈哈1",  nil];
+    self.dataArray = [NSMutableArray arrayWithObjects:@"aaaaaaaa", @"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",@"aaaaaaaa",  nil];
     
     _longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(lonePressMoving:)];
     [self.collectionView addGestureRecognizer:_longPress];
@@ -112,7 +108,11 @@
         self.backgroundColor = [UIColor whiteColor];
         
         self.titleLabel = [[UILabel alloc] initWithFrame:(CGRect){{10,20},{frame.size.width - 20,frame.size.height - 40}}];
-        self.titleLabel.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1];
+        self.titleLabel.backgroundColor = [UIColor whiteColor];
+        self.titleLabel.layer.borderColor = [UIColor blueColor].CGColor;
+        self.titleLabel.layer.borderWidth = 2.0;
+        self.titleLabel.layer.cornerRadius = 5;
+        self.titleLabel.layer.opaque = YES;
         self.titleLabel.textColor = [UIColor blackColor];
         self.titleLabel.font = [UIFont systemFontOfSize:12];
         self.titleLabel.textAlignment = NSTextAlignmentCenter;

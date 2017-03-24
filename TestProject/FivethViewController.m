@@ -33,15 +33,24 @@
     self.tableView.estimatedRowHeight = 50;
     
     NSArray *array = @[@"啊；收到了快放假；安科技；了阿萨德；发；卡拉胶按时；打开房间爱上地方难对付爱上对方考虑是否，阿迪发洛杉矶阿斯蒂芬。阿萨德发了啥地方看见爱上对方答复沙龙东方，阿斯蒂芬是打发是累的法拉盛发。",
-                      @"阿道夫大师傅发洛杉矶阿斯蒂芬。阿萨德发了啥地方看",
-                      @"发洛杉矶阿斯蒂芬。阿萨德发了啥地方看大厦法定是发的是阿斯蒂芬大师傅",
-                      @"发洛杉矶阿斯蒂芬。阿萨德发了啥地方看大师傅发洛杉矶阿斯蒂芬。阿萨德发了啥地方看大法师的发洛杉矶阿斯蒂芬。阿萨德发了啥地方看",
-                      @"大师傅发洛杉矶阿斯蒂芬。阿萨德发了啥地方看发洛杉矶阿斯蒂芬。阿萨德发了啥地方看",
-                      @"发洛杉矶阿斯蒂芬。阿萨德发了啥地方看阿斯顿发斯蒂芬撒旦撒旦法安抚阿斯蒂芬阿斯蒂芬撒旦法发洛杉矶阿斯蒂芬。阿萨德发了啥地方看",
-                      @"阿斯顿发斯蒂芬阿萨德阿斯蒂芬暗室逢灯撒旦法阿斯蒂芬阿斯蒂芬阿斯顿发发洛杉矶阿斯蒂芬。阿萨德发了啥地方看发洛杉矶阿斯蒂芬。阿萨德发了啥地方看a's'd'f's'd'f发洛杉矶阿斯蒂芬。阿萨德发了啥地方看阿萨德发送到发顺丰s'd'f发洛杉矶阿斯蒂芬。阿萨德发了啥地方看撒旦法",
-                      @"发洛杉矶阿斯蒂芬。阿萨德发了啥地方看ad'f'd's'f发洛杉矶阿斯蒂芬。阿萨德发了啥地方看ad'f'd's'f'd's'f",
-                      @"发洛杉矶阿斯蒂芬。阿萨德发了啥地方看发洛杉矶阿斯蒂芬。阿萨德发了啥地方看啊；卡收到了附件；了爱迪生；浪费啊，撒旦拉士大夫。",
-                      @"发洛杉矶阿斯蒂芬。阿萨德发了啥地方看 发洛杉矶阿斯蒂芬。阿萨德发了啥地方看发洛杉矶阿斯蒂芬。阿萨德发了啥地方看发洛杉矶阿斯蒂芬。阿萨德发了啥地方看"];
+                       @"阿道夫大师傅发洛杉矶阿斯蒂芬。阿萨德发了啥地方看",
+                       @"发洛杉矶阿斯蒂芬。阿萨德发了啥地方看大厦法定是发的是阿斯蒂芬大师傅",
+                       @"发洛杉矶阿斯蒂芬。阿萨德发了啥地方看大师傅发洛杉矶阿斯蒂芬。阿萨德发了啥地方看大法师的发洛杉矶阿斯蒂芬。阿萨德发了啥地方看",
+                       @"大师傅发洛杉矶阿斯蒂芬。阿萨德发了啥地方看发洛杉矶阿斯蒂芬。阿萨德发了啥地方看",
+                       @"发洛杉矶阿斯蒂芬。阿萨德发了啥地方看阿斯顿发斯蒂芬撒旦撒旦法安抚阿斯蒂芬阿斯蒂芬撒旦法发洛杉矶阿斯蒂芬。阿萨德发了啥地方看",
+                       @"阿斯顿发斯蒂芬阿萨德阿斯蒂芬暗室逢灯撒旦法阿斯蒂芬阿斯蒂芬阿斯顿发发洛杉矶阿斯蒂芬。阿萨德发了啥地方看发洛杉矶阿斯蒂芬。阿萨德发了啥地方看a's'd'f's'd'f发洛杉矶阿斯蒂芬。阿萨德发了啥地方看阿萨德发送到发顺丰s'd'f发洛杉矶阿斯蒂芬。阿萨德发了啥地方看撒旦法",
+                       @"发洛杉矶阿斯蒂芬。阿萨德发了啥地方看ad'f'd's'f发洛杉矶阿斯蒂芬。阿萨德发了啥地方看ad'f'd's'f'd's'f",
+                       @"发洛杉矶阿斯蒂芬。阿萨德发了啥地方看发洛杉矶阿斯蒂芬。阿萨德发了啥地方看啊；卡收到了附件；了爱迪生；浪费啊，撒旦拉士大夫。",
+                       @"发洛杉矶阿斯蒂芬。阿萨德发了啥地方看 发洛杉矶阿斯蒂芬。阿萨德发了啥地方看发洛杉矶阿斯蒂芬。阿萨德发了啥地方看发洛杉矶阿斯蒂芬。阿萨德发了啥地方看",@"啊；收到了快放假；安科技；了阿萨德；发；卡拉胶按时；打开房间爱上地方难对付爱上对方考虑是否，阿迪发洛杉矶阿斯蒂芬。阿萨德发了啥地方看见爱上对方答复沙龙东方，阿斯蒂芬是打发是累的法拉盛发。",
+                       @"阿道夫大师傅发洛杉矶阿斯蒂芬。阿萨德发了啥地方看",
+                       @"发洛杉矶阿斯蒂芬。阿萨德发了啥地方看大厦法定是发的是阿斯蒂芬大师傅",
+                       @"发洛杉矶阿斯蒂芬。阿萨德发了啥地方看大师傅发洛杉矶阿斯蒂芬。阿萨德发了啥地方看大法师的发洛杉矶阿斯蒂芬。阿萨德发了啥地方看",
+                       @"大师傅发洛杉矶阿斯蒂芬。阿萨德发了啥地方看发洛杉矶阿斯蒂芬。阿萨德发了啥地方看",
+                       @"发洛杉矶阿斯蒂芬。阿萨德发了啥地方看阿斯顿发斯蒂芬撒旦撒旦法安抚阿斯蒂芬阿斯蒂芬撒旦法发洛杉矶阿斯蒂芬。阿萨德发了啥地方看",
+                       @"阿斯顿发斯蒂芬阿萨德阿斯蒂芬暗室逢灯撒旦法阿斯蒂芬阿斯蒂芬阿斯顿发发洛杉矶阿斯蒂芬。阿萨德发了啥地方看发洛杉矶阿斯蒂芬。阿萨德发了啥地方看a's'd'f's'd'f发洛杉矶阿斯蒂芬。阿萨德发了啥地方看阿萨德发送到发顺丰s'd'f发洛杉矶阿斯蒂芬。阿萨德发了啥地方看撒旦法",
+                       @"发洛杉矶阿斯蒂芬。阿萨德发了啥地方看ad'f'd's'f发洛杉矶阿斯蒂芬。阿萨德发了啥地方看ad'f'd's'f'd's'f",
+                       @"发洛杉矶阿斯蒂芬。阿萨德发了啥地方看发洛杉矶阿斯蒂芬。阿萨德发了啥地方看啊；卡收到了附件；了爱迪生；浪费啊，撒旦拉士大夫。",
+                       @"发洛杉矶阿斯蒂芬。阿萨德发了啥地方看 发洛杉矶阿斯蒂芬。阿萨德发了啥地方看发洛杉矶阿斯蒂芬。阿萨德发了啥地方看发洛杉矶阿斯蒂芬。阿萨德发了啥地方看"];
     
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:6];
@@ -61,18 +70,27 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.dataArray.count;
 }
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AutoHeightCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AutoHeightCell"];
+//    AutoHeightCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AutoHeightCell"];
+//    cell.artistImgView.image = [UIImage imageNamed:indexPath.row%2==1?@"3":@"mm10"];
+//    cell.bioLabel.attributedText = self.dataArray[indexPath.row];
 
-    cell.bioLabel.attributedText = self.dataArray[indexPath.row];
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ImgTestCell"];
+//    cell.layer.shouldRasterize = YES;
+//    cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TextTestCell"];
+    
     return cell;
 }
 
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 92;
+}
 
 #pragma mark-
 - (UIImage *)addImage:(UIImage *)image1 toImage:(UIImage *)image2 {

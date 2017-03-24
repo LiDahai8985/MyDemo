@@ -9,12 +9,14 @@
 #import "MMSuperViewController.h"
 
 @interface EighthViewController : MMSuperViewController
-
+@property (nonatomic, strong) UILabel *dataObject;
+@property (nonatomic, strong) UILabel *contentLabel;
 @end
 
 
 @interface EighthCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, strong) UILabel *titleLabel;
+
 
 @end

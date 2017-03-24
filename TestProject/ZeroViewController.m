@@ -166,8 +166,8 @@
     [super viewDidAppear:animated];
 
     // 执行动画
-//    [self performSelector:@selector(startCRoundLoadingAnimation) withObject:nil afterDelay:1];
-//    [self performSelector:@selector(startPaperclipLoadingAnimation) withObject:nil afterDelay:1];
+    [self performSelector:@selector(startCRoundLoadingAnimation) withObject:nil afterDelay:1];
+    [self performSelector:@selector(startPaperclipLoadingAnimation) withObject:nil afterDelay:1];
 }
 
 
@@ -422,6 +422,17 @@
 
 - (IBAction)btnTapped:(id)sender
 {
+    // 围绕x轴旋转
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.x"];
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    animation.fromValue = @(0);
+    animation.toValue = @(M_PI);
+    animation.duration = 1;
+    animation.fillMode = kCAFillModeForwards;
+    animation.removedOnCompletion = NO;
+    [self.testViewLeft.layer addAnimation:animation forKey:@"testLeft"];
+    return;
+    
     /********/
     showAnimation = !showAnimation;
     [pathView showWithAnimation:showAnimation];

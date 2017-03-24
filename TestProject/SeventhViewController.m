@@ -34,7 +34,7 @@ typedef NS_ENUM(NSInteger, ExpandCellAnimation) {
     
     self.expandAnimation = ExpandCellAnimation_onlyOneExpand;
     
-    for (int i=0; i < 15; i ++) {
+    for (int i=0; i < 35; i ++) {
         [self.datasArray addObject:[Model ModelWithNormalHeight:50.f expendHeight:100.f expend:i==0]];
     }
     
@@ -115,7 +115,6 @@ typedef NS_ENUM(NSInteger, ExpandCellAnimation) {
         //**********只展开一行的逻辑************
         
         // 刷新tableview时beginUpdates和endUpdates两方法很重要
-        [tableView beginUpdates];
         
         if (self.currentSelectedIndexPath == indexPath) {
             // 只收缩
@@ -124,9 +123,9 @@ typedef NS_ENUM(NSInteger, ExpandCellAnimation) {
             UITableViewCell *curCell = [tableView cellForRowAtIndexPath:indexPath];
             CGRect rect = curCell.contentView.frame;
             rect.size.height = 46;
-            [UIView animateWithDuration:0.3 animations:^{
+//            [UIView animateWithDuration:5.3 animations:^{
                 curCell.contentView.frame = rect;
-            }];
+//            }];
         } else {
             
             // 一个收缩一个展开
@@ -136,23 +135,29 @@ typedef NS_ENUM(NSInteger, ExpandCellAnimation) {
             UITableViewCell *curCell = [tableView cellForRowAtIndexPath:self.currentSelectedIndexPath];
             UITableViewCell *lastCell = [tableView cellForRowAtIndexPath:lastSelectIndexPath];
             
+            // 原来展开的，现在收缩
             if (lastCell) {
                 CGRect lasRrect = lastCell.contentView.frame;
                 lasRrect.size.height = 46;
                 
-                [UIView animateWithDuration:0.3 animations:^{
+//                [UIView animateWithDuration:5.3 animations:^{
                     lastCell.contentView.frame = lasRrect;
-                }];
+//                }];
             }
             
+            // 收缩着的，现在展开
             CGRect curRect = curCell.contentView.frame;
             curRect.size.height = 155;
-            [UIView animateWithDuration:0.3 animations:^{
+//            [UIView animateWithDuration:5.3 animations:^{
                 curCell.contentView.frame = curRect;
-            }];
+//            }];
         }
         
-        [tableView endUpdates];
+        //此动画时间决定tableview的updates时间，上面每个分动画的具体时间无效
+        [UIView animateWithDuration:0.3 animations:^{
+            [tableView beginUpdates];
+            [tableView endUpdates];
+        }];
         
         //防止最后一行展开时，内容在屏幕下方被遮盖
         [tableView scrollToRowAtIndexPath:self.currentSelectedIndexPath atScrollPosition:UITableViewScrollPositionNone animated:YES];

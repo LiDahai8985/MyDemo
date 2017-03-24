@@ -24,17 +24,32 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *testScrollView;
 @property (strong, nonatomic) CALayer *maskLayer;
 @property (strong, nonatomic) CALayer *testViewMaskLayer;
+@property (strong, nonatomic) NSTimer *timer;
 
 @end
 
 @implementation FirstViewController
 
+- (void)timeUp
+{
+    NSLog(@"timeUp");
+//    [self.timer invalidate];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.title = @"FirstViewController";
+    
+    // 注意与scheduledTimerWithTimeInterval区别，scheduledTimerWithTimeInterval无需手动添加到当前运行循环下
+    /* 通过timerwithTimeInterval:invocation :repeats
+     timerWithTimeInterval:taeget:selector:userInfo:repeats
+     initWithFireDate:interval:target:selector:userInfo:repeats:
+     类方法创建的timer对象没有安排在一个运行循环中，你必须通过运行时对象对应的方法addTimer:forMode:人为的把这个timer添加进那个运行时。
+    */
+    self.timer = [NSTimer timerWithTimeInterval:0.3 target:self selector:@selector(timeUp) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
     
     UIImageView *testImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
     testImg.image = [UIImage imageNamed:@"3"];
@@ -106,6 +121,18 @@
 {
 //    SecondeViewController *second = [[SecondeViewController alloc] init];
 //    [self.navigationController pushViewController:second animated:YES];
+    
+    
+    // 调用系统视频编辑功能
+    NSString *videoPath = [[NSBundle mainBundle] pathForResource:@"9_16" ofType:@"mp4"];
+    if ([UIVideoEditorController canEditVideoAtPath:videoPath])
+    {
+        UIVideoEditorController *vc = [[UIVideoEditorController alloc] init];
+        vc.videoPath = videoPath;
+        [self.navigationController presentViewController:vc animated:YES completion:^{
+            
+        }];
+    }
 }
 
 - (IBAction) startAnimation:(id)sender
@@ -171,9 +198,35 @@
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    UIImageView *newImgView = [[UIImageView alloc] initWithImage:image];
+    UIImageView *newImgView = [[UIImageView alloc] initWithImage:[self pixellateImageWithImage:image]];
     newImgView.frame = CGRectMake(200, 200, 200, 200*16/9);
     [self.view addSubview:newImgView];
+    
+    
+}
+
+- (UIImage *)pixellateImageWithImage:(UIImage *)image
+{
+    CIImage *ciImage = [[CIImage alloc]initWithImage:[UIImage imageNamed:@"3"]];   // 这里特别注意的是  必须要用.png格式的图片  否则加载不出来。
+    
+    //创建filter 滤镜 马赛克效果
+    CIFilter *fileter = [CIFilter filterWithName:@"CIPixellate"];
+    [fileter setValue:ciImage forKey:kCIInputImageKey];
+    [fileter setDefaults];
+    
+    //导出图片
+    CIImage *outPutImage = [fileter valueForKey:kCIOutputImageKey];
+    
+    CIContext *context = [CIContext contextWithOptions:nil];
+    
+    CGImageRef cgImage = [context createCGImage:outPutImage fromRect:[outPutImage extent]];
+    
+    UIImage *finalImage = [UIImage imageWithCGImage:cgImage];
+    
+    // CGImage 并不支持ARC  需要手动释放
+    CGImageRelease(cgImage);
+    
+    return finalImage;
 }
 
 #pragma mark- UIScrollView Delegate

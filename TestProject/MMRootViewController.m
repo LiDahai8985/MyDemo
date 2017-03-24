@@ -16,12 +16,16 @@
 #import "SixthViewController.h"
 #import "SeventhViewController.h"
 #import "EighthViewController.h"
+#import "NinethViewController.h"
+#import "TenthViewController.h"
+#import "EleventhViewController.h"
 
 
 @interface MMRootViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSourceArray;
+@property (nonatomic, strong) dispatch_source_t timer; // GCD定时器
 
 @end
 
@@ -30,8 +34,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.dataSourceArray addObjectsFromArray:@[@"(0)layer相关+statusBar",@"(1)高斯模糊+歌词+截图",@"(2)内购+模态弹出",@"(3)播放器上一首下一首",@"(4)涂抹+播放器横竖屏切换",@"(5)cell自适应高度",@"(6)collectionview自定义layout",@"(7)cell点击后动画展开",@"(8)ios9以后collectionView拖动排序"]];
+    [self.dataSourceArray addObjectsFromArray:@[@"(0)layer相关+statusBar",@"(1)高斯模糊+歌词+截图+系统原生视频编辑",@"(2)内购+模态弹出",@"(3)播放器上一首下一首",@"(4)涂抹+播放器横竖屏切换",@"(5)cell自适应高度",@"(6)collectionview自定义layout",@"(7)cell点击后动画展开",@"(8)ios9以后collectionView拖动排序",@"(9)系统原生二维码识别",@"(10)CoreText学习",@"(11)LivePhoto"]];
     self.tableView.tableFooterView = [UIView new];
+
+    /*
+    self.timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
+    dispatch_source_set_timer(self.timer, DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+    dispatch_source_set_event_handler(self.timer, ^{
+        NSLog(@"-----------------------------");
+    });
+    dispatch_resume(self.timer);
+     */
 }
 
 - (NSMutableArray *)dataSourceArray
@@ -62,6 +75,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.textLabel.adjustsFontSizeToFitWidth = YES;
     }
     
     cell.textLabel.text = [NSString stringWithFormat:@"----%@----",self.dataSourceArray[indexPath.row]];
@@ -98,7 +112,17 @@
     } else if (indexPath.row == 8) {
         EighthViewController *vc = [[EighthViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.row == 9) {
+        NinethViewController *vc = [[NinethViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.row == 10) {
+        TenthViewController *vc = [[TenthViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == 11) {
+        EleventhViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:NSStringFromClass([EleventhViewController class])];
+        [self.navigationController pushViewController:vc animated:YES];
     }
+    
 }
 
 @end
